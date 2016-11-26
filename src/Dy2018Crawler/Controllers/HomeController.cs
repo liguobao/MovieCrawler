@@ -138,7 +138,10 @@ namespace Dy2018Crawler.Controllers
             });
         }
 
-
+        public IActionResult Receiver()
+        {
+            return View();
+        }
 
         public IActionResult Error()
         {
