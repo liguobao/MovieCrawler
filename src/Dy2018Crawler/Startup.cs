@@ -58,7 +58,7 @@ namespace Dy2018Crawler
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            MovieInfoJsonHelper.Init(Path.Combine(env.WebRootPath, "hotMovie.json"));
+            ConstsConf.WWWRootPath = env.WebRootPath;
         }
     }
 }

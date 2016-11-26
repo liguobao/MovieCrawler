@@ -12,8 +12,9 @@ namespace Dy2018Crawler.Models
 
         public string Dy2018OnlineUrl { get; set; }
 
-
         public string MovieIntro { get; set; }
+
+        public DateTime PubDate { get; set; }
 
         public List<string> XunLeiDownLoadURLList { get; set; }
 

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Hot Movie";
+    ViewData["Title"] = "Latest Movie";
 }
 @model List<Dy2018Crawler.Models.MovieInfo>
 
@@ -11,16 +11,16 @@
             {
                 <li><a href="@movie.Dy2018OnlineUrl" target="_blank">@movie.MovieName</a></li>
             }
-           
+
         </ul>
     </div>
     <div class="col-md-7">
         <h2>DownLoadURL</h2>
         <ul>
-           @foreach (var movie in Model)
+            @foreach (var movie in Model)
             {
-            <li><a href="@movie.XunLeiDownLoadURLList.FirstOrDefault()" target="_blank">@(movie.XunLeiDownLoadURLList.FirstOrDefault())</a></li>
-           }
+                <li><a href="@movie.XunLeiDownLoadURLList.FirstOrDefault()" target="_blank">@(movie.XunLeiDownLoadURLList.FirstOrDefault())</a></li>
+            }
         </ul>
     </div>
 </div>
