@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Dy2018Crawler.Models
 {
@@ -10,6 +11,7 @@ namespace Dy2018Crawler.Models
         public string MovieName { get; set; }
 
         public string Dy2018OnlineUrl { get; set; }
+
 
         public string MovieIntro { get; set; }
 

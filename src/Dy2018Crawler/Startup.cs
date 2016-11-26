@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,6 +58,7 @@ namespace Dy2018Crawler
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            MovieInfoJsonHelper.Init(Path.Combine(env.WebRootPath, "hotMovie.json"));
         }
     }
 }
