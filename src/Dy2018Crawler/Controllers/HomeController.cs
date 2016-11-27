@@ -143,6 +143,24 @@ namespace Dy2018Crawler.Controllers
             return View();
         }
 
+        public IActionResult RefreshMovie()
+        {
+            AddToHotMovieList();
+            AddToLatestMovieList();
+            return View();
+        }
+
+        public IActionResult ShowLatestMoiveInfo(string onlineURL)
+        {
+            return View(latestMovieList.GetMovieInfo(onlineURL));
+        }
+
+        public IActionResult ShowHotMoiveInfo(string onlineURL)
+        {
+            return View(hotMovieList.GetMovieInfo(onlineURL));
+        }
+
+
         public IActionResult Error()
         {
             return View();

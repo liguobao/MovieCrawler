@@ -90,6 +90,16 @@ namespace Dy2018Crawler
         {
             return _cdMovieInfo.ContainsKey(onlieURL);
         }
+
+
+        public MovieInfo GetMovieInfo(String key)
+        {
+            if (_cdMovieInfo.ContainsKey(key))
+                return _cdMovieInfo[key];
+            else
+                return null;
+        }
+
         /// <summary>
         /// 写入json文件
         /// </summary>

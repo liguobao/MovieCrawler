@@ -9,7 +9,7 @@
         <ul>
             @foreach (var movie in Model)
             {
-                <li><a href="@movie.Dy2018OnlineUrl" target="_blank">@movie.MovieName</a></li>
+                <li><a href="@(Url.Action("ShowHotMoiveInfo")+"?onlineURL="+@movie.Dy2018OnlineUrl)" target="_blank">@movie.MovieName</a></li>
             }
            
         </ul>
