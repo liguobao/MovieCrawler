@@ -2,7 +2,7 @@
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.1",
-      "type": "platform"
+      //"type": "platform"
     },
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.1",
@@ -22,7 +22,6 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "AngleSharp": "0.9.9",
-    "Pomelo.AspNetCore.TimedJob": "1.0.0-prerelease-20160813",
     "System.Text.Encoding.CodePages": "4.3.0"
   },
 
@@ -61,10 +60,10 @@
     ]
   },
 
-  "scripts": {
-    "prepublish": [ "bower install", "dotnet bundle" ],
-    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
-  },
+  //"scripts": {
+  //  "prepublish": [ "bower install", "dotnet bundle" ],
+  //  "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+  //},
 
   "runtimes": {
     "win7-x64": {},

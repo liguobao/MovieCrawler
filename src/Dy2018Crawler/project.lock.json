@@ -950,29 +950,6 @@
           "lib/netstandard1.6/Microsoft.DotNet.ProjectModel.Loader.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Caching.Memory": "1.0.0",
-          "Microsoft.Extensions.DependencyInjection": "1.0.0",
-          "Microsoft.Extensions.Logging": "1.0.0",
-          "Remotion.Linq": "2.1.1",
-          "System.Collections.Concurrent": "4.0.12",
-          "System.Collections.Immutable": "1.2.0",
-          "System.ComponentModel.Annotations": "4.1.0",
-          "System.Interactive.Async": "3.0.0",
-          "System.Linq.Queryable": "4.0.1",
-          "System.ObjectModel": "4.0.12",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
-        }
-      },
       "Microsoft.Extensions.Caching.Abstractions/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -1913,45 +1890,6 @@
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
         }
       },
-      "Pomelo.AspNetCore.TimedJob/1.0.0-prerelease-20160813": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Hosting": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "1.0.0",
-          "Microsoft.Extensions.DependencyModel": "1.0.0",
-          "NETStandard.Library": "1.6.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Timer": "4.0.1"
-        },
-        "compile": {
-          "lib/netstandard1.6/Pomelo.AspNetCore.TimedJob.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.6/Pomelo.AspNetCore.TimedJob.dll": {}
-        }
-      },
-      "Remotion.Linq/2.1.1": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Linq": "4.1.0",
-          "System.Linq.Expressions": "4.1.0",
-          "System.Linq.Queryable": "4.0.1",
-          "System.ObjectModel": "4.0.12",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Threading": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.0/Remotion.Linq.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/Remotion.Linq.dll": {}
-        }
-      },
       "runtime.native.System/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -2452,25 +2390,6 @@
             "assetType": "runtime",
             "rid": "win"
           }
-        }
-      },
-      "System.Interactive.Async/3.0.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Linq": "4.1.0",
-          "System.Resources.ResourceManager": "4.0.1",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.0/System.Interactive.Async.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/System.Interactive.Async.dll": {}
         }
       },
       "System.IO/4.3.0": {
@@ -4832,29 +4751,6 @@
           "lib/netstandard1.6/Microsoft.DotNet.ProjectModel.Loader.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Caching.Memory": "1.0.0",
-          "Microsoft.Extensions.DependencyInjection": "1.0.0",
-          "Microsoft.Extensions.Logging": "1.0.0",
-          "Remotion.Linq": "2.1.1",
-          "System.Collections.Concurrent": "4.0.12",
-          "System.Collections.Immutable": "1.2.0",
-          "System.ComponentModel.Annotations": "4.1.0",
-          "System.Interactive.Async": "3.0.0",
-          "System.Linq.Queryable": "4.0.1",
-          "System.ObjectModel": "4.0.12",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
-        }
-      },
       "Microsoft.Extensions.Caching.Abstractions/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -5798,45 +5694,6 @@
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
         }
       },
-      "Pomelo.AspNetCore.TimedJob/1.0.0-prerelease-20160813": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Hosting": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "1.0.0",
-          "Microsoft.Extensions.DependencyModel": "1.0.0",
-          "NETStandard.Library": "1.6.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Timer": "4.0.1"
-        },
-        "compile": {
-          "lib/netstandard1.6/Pomelo.AspNetCore.TimedJob.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.6/Pomelo.AspNetCore.TimedJob.dll": {}
-        }
-      },
-      "Remotion.Linq/2.1.1": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Linq": "4.1.0",
-          "System.Linq.Expressions": "4.1.0",
-          "System.Linq.Queryable": "4.0.1",
-          "System.ObjectModel": "4.0.12",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Threading": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.0/Remotion.Linq.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/Remotion.Linq.dll": {}
-        }
-      },
       "runtime.any.System.Collections/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -6764,25 +6621,6 @@
         },
         "runtime": {
           "runtimes/unix/lib/netstandard1.3/System.Globalization.Extensions.dll": {}
-        }
-      },
-      "System.Interactive.Async/3.0.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Linq": "4.1.0",
-          "System.Resources.ResourceManager": "4.0.1",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.0/System.Interactive.Async.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/System.Interactive.Async.dll": {}
         }
       },
       "System.IO/4.3.0": {
@@ -9040,29 +8878,6 @@
           "lib/netstandard1.6/Microsoft.DotNet.ProjectModel.Loader.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Caching.Memory": "1.0.0",
-          "Microsoft.Extensions.DependencyInjection": "1.0.0",
-          "Microsoft.Extensions.Logging": "1.0.0",
-          "Remotion.Linq": "2.1.1",
-          "System.Collections.Concurrent": "4.0.12",
-          "System.Collections.Immutable": "1.2.0",
-          "System.ComponentModel.Annotations": "4.1.0",
-          "System.Interactive.Async": "3.0.0",
-          "System.Linq.Queryable": "4.0.1",
-          "System.ObjectModel": "4.0.12",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
-        }
-      },
       "Microsoft.Extensions.Caching.Abstractions/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -10006,45 +9821,6 @@
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
         }
       },
-      "Pomelo.AspNetCore.TimedJob/1.0.0-prerelease-20160813": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Hosting": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "1.0.0",
-          "Microsoft.Extensions.DependencyModel": "1.0.0",
-          "NETStandard.Library": "1.6.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Timer": "4.0.1"
-        },
-        "compile": {
-          "lib/netstandard1.6/Pomelo.AspNetCore.TimedJob.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.6/Pomelo.AspNetCore.TimedJob.dll": {}
-        }
-      },
-      "Remotion.Linq/2.1.1": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Linq": "4.1.0",
-          "System.Linq.Expressions": "4.1.0",
-          "System.Linq.Queryable": "4.0.1",
-          "System.ObjectModel": "4.0.12",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Threading": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.0/Remotion.Linq.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/Remotion.Linq.dll": {}
-        }
-      },
       "runtime.any.System.Collections/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -10972,25 +10748,6 @@
         },
         "runtime": {
           "runtimes/unix/lib/netstandard1.3/System.Globalization.Extensions.dll": {}
-        }
-      },
-      "System.Interactive.Async/3.0.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Linq": "4.1.0",
-          "System.Resources.ResourceManager": "4.0.1",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.0/System.Interactive.Async.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/System.Interactive.Async.dll": {}
         }
       },
       "System.IO/4.3.0": {
@@ -13248,29 +13005,6 @@
           "lib/netstandard1.6/Microsoft.DotNet.ProjectModel.Loader.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Caching.Memory": "1.0.0",
-          "Microsoft.Extensions.DependencyInjection": "1.0.0",
-          "Microsoft.Extensions.Logging": "1.0.0",
-          "Remotion.Linq": "2.1.1",
-          "System.Collections.Concurrent": "4.0.12",
-          "System.Collections.Immutable": "1.2.0",
-          "System.ComponentModel.Annotations": "4.1.0",
-          "System.Interactive.Async": "3.0.0",
-          "System.Linq.Queryable": "4.0.1",
-          "System.ObjectModel": "4.0.12",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
-        }
-      },
       "Microsoft.Extensions.Caching.Abstractions/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -14214,45 +13948,6 @@
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
         }
       },
-      "Pomelo.AspNetCore.TimedJob/1.0.0-prerelease-20160813": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Hosting": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "1.0.0",
-          "Microsoft.Extensions.DependencyModel": "1.0.0",
-          "NETStandard.Library": "1.6.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Timer": "4.0.1"
-        },
-        "compile": {
-          "lib/netstandard1.6/Pomelo.AspNetCore.TimedJob.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.6/Pomelo.AspNetCore.TimedJob.dll": {}
-        }
-      },
-      "Remotion.Linq/2.1.1": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Linq": "4.1.0",
-          "System.Linq.Expressions": "4.1.0",
-          "System.Linq.Queryable": "4.0.1",
-          "System.ObjectModel": "4.0.12",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Threading": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.0/Remotion.Linq.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/Remotion.Linq.dll": {}
-        }
-      },
       "runtime.any.System.Collections/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -15182,25 +14877,6 @@
         },
         "runtime": {
           "runtimes/unix/lib/netstandard1.3/System.Globalization.Extensions.dll": {}
-        }
-      },
-      "System.Interactive.Async/3.0.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Linq": "4.1.0",
-          "System.Resources.ResourceManager": "4.0.1",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.0/System.Interactive.Async.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/System.Interactive.Async.dll": {}
         }
       },
       "System.IO/4.3.0": {
@@ -17458,29 +17134,6 @@
           "lib/netstandard1.6/Microsoft.DotNet.ProjectModel.Loader.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Caching.Memory": "1.0.0",
-          "Microsoft.Extensions.DependencyInjection": "1.0.0",
-          "Microsoft.Extensions.Logging": "1.0.0",
-          "Remotion.Linq": "2.1.1",
-          "System.Collections.Concurrent": "4.0.12",
-          "System.Collections.Immutable": "1.2.0",
-          "System.ComponentModel.Annotations": "4.1.0",
-          "System.Interactive.Async": "3.0.0",
-          "System.Linq.Queryable": "4.0.1",
-          "System.ObjectModel": "4.0.12",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
-        }
-      },
       "Microsoft.Extensions.Caching.Abstractions/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -18425,45 +18078,6 @@
         },
         "runtime": {
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
-        }
-      },
-      "Pomelo.AspNetCore.TimedJob/1.0.0-prerelease-20160813": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Hosting": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "1.0.0",
-          "Microsoft.Extensions.DependencyModel": "1.0.0",
-          "NETStandard.Library": "1.6.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Timer": "4.0.1"
-        },
-        "compile": {
-          "lib/netstandard1.6/Pomelo.AspNetCore.TimedJob.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.6/Pomelo.AspNetCore.TimedJob.dll": {}
-        }
-      },
-      "Remotion.Linq/2.1.1": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Linq": "4.1.0",
-          "System.Linq.Expressions": "4.1.0",
-          "System.Linq.Queryable": "4.0.1",
-          "System.ObjectModel": "4.0.12",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Threading": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.0/Remotion.Linq.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/Remotion.Linq.dll": {}
         }
       },
       "runtime.any.System.Collections/4.3.0": {
@@ -19433,25 +19047,6 @@
         },
         "runtime": {
           "runtimes/win/lib/netstandard1.3/System.Globalization.Extensions.dll": {}
-        }
-      },
-      "System.Interactive.Async/3.0.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Linq": "4.1.0",
-          "System.Resources.ResourceManager": "4.0.1",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.0/System.Interactive.Async.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/System.Interactive.Async.dll": {}
         }
       },
       "System.IO/4.3.0": {
@@ -21709,29 +21304,6 @@
           "lib/netstandard1.6/Microsoft.DotNet.ProjectModel.Loader.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Caching.Memory": "1.0.0",
-          "Microsoft.Extensions.DependencyInjection": "1.0.0",
-          "Microsoft.Extensions.Logging": "1.0.0",
-          "Remotion.Linq": "2.1.1",
-          "System.Collections.Concurrent": "4.0.12",
-          "System.Collections.Immutable": "1.2.0",
-          "System.ComponentModel.Annotations": "4.1.0",
-          "System.Interactive.Async": "3.0.0",
-          "System.Linq.Queryable": "4.0.1",
-          "System.ObjectModel": "4.0.12",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Reflection.TypeExtensions": "4.1.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
-        }
-      },
       "Microsoft.Extensions.Caching.Abstractions/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -22676,45 +22248,6 @@
         },
         "runtime": {
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
-        }
-      },
-      "Pomelo.AspNetCore.TimedJob/1.0.0-prerelease-20160813": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Hosting": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "1.0.0",
-          "Microsoft.Extensions.DependencyModel": "1.0.0",
-          "NETStandard.Library": "1.6.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Timer": "4.0.1"
-        },
-        "compile": {
-          "lib/netstandard1.6/Pomelo.AspNetCore.TimedJob.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.6/Pomelo.AspNetCore.TimedJob.dll": {}
-        }
-      },
-      "Remotion.Linq/2.1.1": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Linq": "4.1.0",
-          "System.Linq.Expressions": "4.1.0",
-          "System.Linq.Queryable": "4.0.1",
-          "System.ObjectModel": "4.0.12",
-          "System.Reflection": "4.1.0",
-          "System.Reflection.Extensions": "4.0.1",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Threading": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.0/Remotion.Linq.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/Remotion.Linq.dll": {}
         }
       },
       "runtime.any.System.Collections/4.3.0": {
@@ -23684,25 +23217,6 @@
         },
         "runtime": {
           "runtimes/win/lib/netstandard1.3/System.Globalization.Extensions.dll": {}
-        }
-      },
-      "System.Interactive.Async/3.0.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Debug": "4.0.11",
-          "System.Linq": "4.1.0",
-          "System.Resources.ResourceManager": "4.0.1",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11"
-        },
-        "compile": {
-          "lib/netstandard1.0/System.Interactive.Async.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/System.Interactive.Async.dll": {}
         }
       },
       "System.IO/4.3.0": {
@@ -25763,19 +25277,6 @@
         "lib/netstandard1.6/Microsoft.DotNet.ProjectModel.Loader.dll"
       ]
     },
-    "Microsoft.EntityFrameworkCore/1.0.0": {
-      "sha512": "Vqg/v0cXRQZQH0gY3VHHqt0Bt5WZEkDReVpI1sNYKHVbVtnMYFKPp5SiNygosUJYrJk1rSGb8UVkplDNNUkEgg==",
-      "type": "package",
-      "path": "Microsoft.EntityFrameworkCore/1.0.0",
-      "files": [
-        "Microsoft.EntityFrameworkCore.1.0.0.nupkg.sha512",
-        "Microsoft.EntityFrameworkCore.nuspec",
-        "lib/net451/Microsoft.EntityFrameworkCore.dll",
-        "lib/net451/Microsoft.EntityFrameworkCore.xml",
-        "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll",
-        "lib/netstandard1.3/Microsoft.EntityFrameworkCore.xml"
-      ]
-    },
     "Microsoft.Extensions.Caching.Abstractions/1.0.0": {
       "sha512": "IxlFDVOchL6tdR05bk7EiJvMtvZrVkZXBhkbXqc3GxOHOrHFGcN+92WoWFPeBpdpy8ot/Px5ZdXzt7k+2n1Bdg==",
       "type": "package",
@@ -26613,36 +26114,6 @@
         "lib/net45/NuGet.Versioning.xml",
         "lib/netstandard1.0/NuGet.Versioning.dll",
         "lib/netstandard1.0/NuGet.Versioning.xml"
-      ]
-    },
-    "Pomelo.AspNetCore.TimedJob/1.0.0-prerelease-20160813": {
-      "sha512": "mzuzm59ZnAMxB/b+A4CMBtiUdzJo1OeCiZ1r4AhSIkKDrTHtqeeQCS27/EWqJBgg7RCz03QqMS5IbNjmlg6bCQ==",
-      "type": "package",
-      "path": "Pomelo.AspNetCore.TimedJob/1.0.0-prerelease-20160813",
-      "files": [
-        "Pomelo.AspNetCore.TimedJob.1.0.0-prerelease-20160813.nupkg.sha512",
-        "Pomelo.AspNetCore.TimedJob.nuspec",
-        "lib/net451/Pomelo.AspNetCore.TimedJob.dll",
-        "lib/netstandard1.6/Pomelo.AspNetCore.TimedJob.dll"
-      ]
-    },
-    "Remotion.Linq/2.1.1": {
-      "sha512": "IJn0BqkvwEDpP+2qjvci7n4/a9f7DhKESLWb2/uG4xQh3rTkGTBUz69bI4IivCoKkTFAqjXxYDZw2K/npohjsw==",
-      "type": "package",
-      "path": "Remotion.Linq/2.1.1",
-      "files": [
-        "Remotion.Linq.2.1.1.nupkg.sha512",
-        "Remotion.Linq.nuspec",
-        "lib/net35/Remotion.Linq.XML",
-        "lib/net35/Remotion.Linq.dll",
-        "lib/net40/Remotion.Linq.XML",
-        "lib/net40/Remotion.Linq.dll",
-        "lib/net45/Remotion.Linq.XML",
-        "lib/net45/Remotion.Linq.dll",
-        "lib/netstandard1.0/Remotion.Linq.dll",
-        "lib/netstandard1.0/Remotion.Linq.xml",
-        "lib/portable-net45+win+wpa81+wp80/Remotion.Linq.dll",
-        "lib/portable-net45+win+wpa81+wp80/Remotion.Linq.xml"
       ]
     },
     "runtime.any.System.Collections/4.3.0": {
@@ -29534,19 +29005,6 @@
         "runtimes/unix/lib/netstandard1.3/System.Globalization.Extensions.dll",
         "runtimes/win/lib/net46/System.Globalization.Extensions.dll",
         "runtimes/win/lib/netstandard1.3/System.Globalization.Extensions.dll"
-      ]
-    },
-    "System.Interactive.Async/3.0.0": {
-      "sha512": "UEM+WmG1Oq0bNbPx/E1jaIQ83QOrPfVDUyuYBtG6D6DpB77ytv9flPterMujumpHuoRjSc0ilSB8w41fQc05dw==",
-      "type": "package",
-      "path": "System.Interactive.Async/3.0.0",
-      "files": [
-        "System.Interactive.Async.3.0.0.nupkg.sha512",
-        "System.Interactive.Async.nuspec",
-        "lib/net45/System.Interactive.Async.dll",
-        "lib/net45/System.Interactive.Async.xml",
-        "lib/netstandard1.0/System.Interactive.Async.dll",
-        "lib/netstandard1.0/System.Interactive.Async.xml"
       ]
     },
     "System.IO/4.3.0": {
@@ -33280,7 +32738,6 @@
       "Microsoft.Extensions.Options.ConfigurationExtensions >= 1.0.0",
       "Microsoft.NETCore.App >= 1.0.1",
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0",
-      "Pomelo.AspNetCore.TimedJob >= 1.0.0-prerelease-20160813",
       "System.Text.Encoding.CodePages >= 4.3.0"
     ],
     ".NETCoreApp,Version=v1.0": []

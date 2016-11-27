@@ -15,6 +15,7 @@ namespace Dy2018Crawler
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
+               // .UseUrls("http://*:2018")
                 .UseStartup<Startup>()
                 .Build();
 
