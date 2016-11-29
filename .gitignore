@@ -1,3 +1,5 @@
 /src/Dy2018Crawler/bin
 /src/Dy2018Crawler/obj
 /src/Dy2018Crawler/codewebsiteDy2018Crawler
+/src/Dy2018Crawler/wwwroot/NLogFile/*.log
+/src/Dy2018Crawler/wwwroot/NLogFile/*.log

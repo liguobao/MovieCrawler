@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 
 namespace Dy2018Crawler
 {
@@ -31,13 +32,14 @@ namespace Dy2018Crawler
         {
             // Add framework services.
             services.AddMvc();
+            services.AddTimedJob();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            env.ConfigureNLog("nlog.config");
+            app.UseTimedJob();
 
             if (env.IsDevelopment())
             {
@@ -59,6 +61,8 @@ namespace Dy2018Crawler
             });
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             ConstsConf.WWWRootPath = env.WebRootPath;
+
+           
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Dy2018Crawler.Controllers
 
         private static MovieInfoHelper hotMovieList = new MovieInfoHelper(Path.Combine(ConstsConf.WWWRootPath, "hotMovie.json"));
 
-        private HtmlParser htmlParser = new HtmlParser();
+        private static HtmlParser htmlParser = new HtmlParser();
 
         public IActionResult Index(int isRefresh = 0)
         {

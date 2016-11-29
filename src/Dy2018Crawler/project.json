@@ -22,7 +22,9 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "AngleSharp": "0.9.9",
-    "System.Text.Encoding.CodePages": "4.3.0"
+    "System.Text.Encoding.CodePages": "4.3.0",
+    "Pomelo.AspNetCore.TimedJob": "1.1.0-rtm-10026",
+    "NLog.Extensions.Logging": "1.0.0-rtm-alpha4"
   },
 
   "tools": {
