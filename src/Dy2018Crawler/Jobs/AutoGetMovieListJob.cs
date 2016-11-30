@@ -18,12 +18,12 @@ namespace Dy2018Crawler.Jobs
 
         private static HtmlParser htmlParser = new HtmlParser();
 
-        [Invoke(Begin = "2016-11-29 22:10", Interval = 1000 * 3600, SkipWhileExecuting =true)]
+        [Invoke(Begin = "2016-11-29 22:10", Interval = 1000 * 3600*3, SkipWhileExecuting =true)]
         public void Run()
         {
             LogHelper.Info("Start crawling");
 
-            AddToLatestMovieList(10);
+            AddToLatestMovieList(100);
             AddToHotMovieList();
 
             LogHelper.Info("Finish crawling");

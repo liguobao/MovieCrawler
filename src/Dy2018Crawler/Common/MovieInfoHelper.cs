@@ -81,6 +81,7 @@ namespace Dy2018Crawler
             if (!_cdMovieInfo.ContainsKey(movieInfo.Dy2018OnlineUrl))
             {
                 WriteToJsonFile();
+                LogHelper.Info("Add Movie Success!");
                 return _cdMovieInfo.TryAdd(movieInfo.Dy2018OnlineUrl, movieInfo);
             }
             return true;
