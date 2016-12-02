@@ -25,7 +25,6 @@ namespace Dy2018Crawler.Jobs
 
             AddToLatestMovieList(100);
             AddToHotMovieList();
-
             LogHelper.Info("Finish crawling");
         }
 
