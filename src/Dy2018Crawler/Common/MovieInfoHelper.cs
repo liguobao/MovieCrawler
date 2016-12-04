@@ -147,27 +147,39 @@ namespace Dy2018Crawler
         /// <returns></returns>
         public static MovieInfo GetMovieInfoFromOnlineURL(string onlineURL)
         {
-            var movieHTML = HTTPHelper.GetHTMLByURL(onlineURL);
-            var movieDoc = htmlParser.Parse(movieHTML);
-            var zoom = movieDoc.GetElementById("Zoom");
-            var lstDownLoadURL = movieDoc.QuerySelectorAll("[bgcolor='#fdfddf']");
-            var updatetime = movieDoc.QuerySelector("span.updatetime"); var pubDate = DateTime.Now;
-            if (updatetime != null && !string.IsNullOrEmpty(updatetime.InnerHtml))
+            try
             {
-                DateTime.TryParse(updatetime.InnerHtml.Replace("发布时间：", ""), out pubDate);
+                var movieHTML = HTTPHelper.GetHTMLByURL(onlineURL);
+                if (string.IsNullOrEmpty(movieHTML))
+                    return null;
+                var movieDoc = htmlParser.Parse(movieHTML);
+                var zoom = movieDoc.GetElementById("Zoom");
+                var lstDownLoadURL = movieDoc.QuerySelectorAll("[bgcolor='#fdfddf']");
+                var updatetime = movieDoc.QuerySelector("span.updatetime"); var pubDate = DateTime.Now;
+                if (updatetime != null && !string.IsNullOrEmpty(updatetime.InnerHtml))
+                {
+                    DateTime.TryParse(updatetime.InnerHtml.Replace("发布时间：", ""), out pubDate);
+                }
+                var lstOnlineURL = lstDownLoadURL.Select(a => a.QuerySelector("a")).Where(item => item != null).Select(item => item.InnerHtml).ToList();
+
+                var movieName = movieDoc.QuerySelector("div.title_all");
+
+                var movieInfo = new MovieInfo()
+                {
+                    MovieName = movieName!=null && movieName.QuerySelector("h1")!=null ?
+                    movieName.QuerySelector("h1").InnerHtml:"找不到影片信息...",
+                    Dy2018OnlineUrl = onlineURL,
+                    MovieIntro = zoom != null ? WebUtility.HtmlEncode(zoom.InnerHtml) : "暂无介绍...",
+                    XunLeiDownLoadURLList = lstOnlineURL,
+                    PubDate = pubDate,
+                };
+                return movieInfo;
+            }catch(Exception ex)
+            {
+                LogHelper.Error("GetMovieInfoFromOnlineURL Exception",ex,new {  OnloneURL = onlineURL});
+                return null;
             }
-
-
-            var movieInfo = new MovieInfo()
-            {
-                MovieName = movieDoc.QuerySelector("div.title_all").FirstElementChild.InnerHtml,
-                Dy2018OnlineUrl = onlineURL,
-                MovieIntro = zoom != null ? WebUtility.HtmlEncode(zoom.InnerHtml) : "暂无介绍...",
-                XunLeiDownLoadURLList = lstDownLoadURL != null ?
-                lstDownLoadURL.Select(item=>item.QuerySelector("a").InnerHtml).ToList() : null,
-                PubDate = pubDate,
-            };
-            return movieInfo;
+           
         }
 
     }

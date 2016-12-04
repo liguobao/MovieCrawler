@@ -84,7 +84,17 @@ namespace Dy2018Crawler.Controllers
 
         public IActionResult ShowMoiveDetail(string onlineURL)
         {
-            return View(MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL));
+            var movieInfo = MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
+            if(movieInfo==null)
+            {
+               var  lasestMovieInfo = latestMovieList.GetMovieInfo(onlineURL);
+               var hotMovieInfo = hotMovieList.GetMovieInfo(onlineURL);
+                if (lasestMovieInfo != null)
+                    movieInfo = lasestMovieInfo;
+                else if(hotMovieInfo!=null)
+                    movieInfo = hotMovieInfo;
+            }
+            return View(movieInfo);
         }
 
 
@@ -117,7 +127,7 @@ namespace Dy2018Crawler.Controllers
                                 if (!hotMovieList.IsContainsMoive(onlineURL))
                                 {
                                     MovieInfo movieInfo = MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
-                                    if (movieInfo.XunLeiDownLoadURLList != null && movieInfo.XunLeiDownLoadURLList.Count != 0)
+                                    if (movieInfo!=null&&movieInfo.XunLeiDownLoadURLList != null && movieInfo.XunLeiDownLoadURLList.Count != 0)
                                         hotMovieList.AddToMovieDic(movieInfo);
                                 }
                             });
@@ -158,7 +168,7 @@ namespace Dy2018Crawler.Controllers
                                 if (!latestMovieList.IsContainsMoive(onlineURL))
                                 {
                                     MovieInfo movieInfo = MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
-                                    if (movieInfo.XunLeiDownLoadURLList != null && movieInfo.XunLeiDownLoadURLList.Count != 0)
+                                    if (movieInfo!=null&&movieInfo.XunLeiDownLoadURLList != null && movieInfo.XunLeiDownLoadURLList.Count != 0)
                                         latestMovieList.AddToMovieDic(movieInfo);
                                 }
                             });

@@ -30,29 +30,13 @@ namespace Dy2018Crawler
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                LogHelper.Error("GetHTMLByURL Exception", ex,new { Url=url});
                 return string.Empty;
             }
         }
 
 
-        public static string GetHTML(string url)
-        {
-            try
-            {
-                Client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate");
-                Client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("Mozilla", "4.0"));
-                Client.DefaultRequestHeaders.ExpectContinue = true;
-                var task = Client.GetStringAsync(url);
-                return task.Result; 
-            }
-            catch (System.Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                return string.Empty;
-            }
-        }
-       
+      
     }
 
 

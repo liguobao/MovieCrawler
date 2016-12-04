@@ -51,7 +51,7 @@ namespace Dy2018Crawler.Jobs
                                 if (!latestMovieList.IsContainsMoive(onlineURL))
                                 {
                                     MovieInfo movieInfo = MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
-                                    if (movieInfo.XunLeiDownLoadURLList != null && movieInfo.XunLeiDownLoadURLList.Count != 0)
+                                    if (movieInfo != null && movieInfo.XunLeiDownLoadURLList != null && movieInfo.XunLeiDownLoadURLList.Count != 0)
                                         latestMovieList.AddToMovieDic(movieInfo);
                                 }
                             });
@@ -67,36 +67,35 @@ namespace Dy2018Crawler.Jobs
 
         private void AddToHotMovieList()
         {
-           
-                try
+            try
+            {
+                var htmlDoc = HTTPHelper.GetHTMLByURL("http://www.dy2018.com/");
+                var dom = htmlParser.Parse(htmlDoc);
+                var lstDivInfo = dom.QuerySelectorAll("div.co_content222");
+                if (lstDivInfo != null)
                 {
-                    var htmlDoc = HTTPHelper.GetHTMLByURL("http://www.dy2018.com/");
-                    var dom = htmlParser.Parse(htmlDoc);
-                    var lstDivInfo = dom.QuerySelectorAll("div.co_content222");
-                    if (lstDivInfo != null)
+                    //前三个DIV为新电影
+                    foreach (var divInfo in lstDivInfo.Take(3))
                     {
-                        //前三个DIV为新电影
-                        foreach (var divInfo in lstDivInfo.Take(3))
+                        divInfo.QuerySelectorAll("a").Where(a => a.GetAttribute("href").Contains("/i/")).ToList().ForEach(
+                        a =>
                         {
-                            divInfo.QuerySelectorAll("a").Where(a => a.GetAttribute("href").Contains("/i/")).ToList().ForEach(
-                            a =>
+                            var onlineURL = "http://www.dy2018.com" + a.GetAttribute("href");
+                            if (!hotMovieList.IsContainsMoive(onlineURL))
                             {
-                                var onlineURL = "http://www.dy2018.com" + a.GetAttribute("href");
-                                if (!hotMovieList.IsContainsMoive(onlineURL))
-                                {
-                                    MovieInfo movieInfo = MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
-                                    if (movieInfo.XunLeiDownLoadURLList != null && movieInfo.XunLeiDownLoadURLList.Count != 0)
-                                        hotMovieList.AddToMovieDic(movieInfo);
-                                }
-                            });
-                        }
+                                MovieInfo movieInfo = MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
+                                if (movieInfo != null && movieInfo.XunLeiDownLoadURLList != null && movieInfo.XunLeiDownLoadURLList.Count != 0)
+                                    hotMovieList.AddToMovieDic(movieInfo);
+                            }
+                        });
                     }
+                }
 
-                }
-                catch (Exception ex)
-                {
-                   LogHelper.Error("AddToHotMovieList",ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error("AddToHotMovieList",ex);
+            }
           
         }
 
