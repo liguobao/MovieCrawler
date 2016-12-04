@@ -3,7 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using AngleSharp.Parser.Html;
 using Dy2018Crawler.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -15,12 +17,15 @@ namespace Dy2018Crawler
 
         private  ConcurrentDictionary<string, MovieInfo> _cdMovieInfo = new ConcurrentDictionary<string, MovieInfo>();
 
+        private static HtmlParser htmlParser = new HtmlParser();
+
         private  string _movieJsonFilePath = "";
+
 
         /// <summary>
         /// 初始化电影列表
         /// </summary>
-        /// <param name="jsonFilePath"></param>
+        /// <param name="jsonFilePath">Json文件存放位置</param>
         public  MovieInfoHelper(string jsonFilePath)
         {
             _movieJsonFilePath = jsonFilePath;
@@ -28,6 +33,7 @@ namespace Dy2018Crawler
             {
                 var pvFile = File.Create(jsonFilePath);
                 pvFile.Flush();
+                pvFile.Dispose();
                 return;
 
             }
@@ -51,11 +57,13 @@ namespace Dy2018Crawler
                                 _cdMovieInfo.TryAdd(movie.Key, movie.FirstOrDefault());
                         }
                     }
+                    
 
                 }
                 catch (Exception ex)
                 {
-                    //write 
+                    LogHelper.Error("MovieInfoHelper Exception", ex);
+
                 }
             }
 
@@ -92,7 +100,11 @@ namespace Dy2018Crawler
             return _cdMovieInfo.ContainsKey(onlieURL);
         }
 
-
+        /// <summary>
+        /// 通过Key获取内存中的电影数据
+        /// </summary>
+        /// <param name="key">OnlineURL</param>
+        /// <returns></returns>
         public MovieInfo GetMovieInfo(String key)
         {
             if (_cdMovieInfo.ContainsKey(key))
@@ -108,7 +120,7 @@ namespace Dy2018Crawler
         {
             if (_cdMovieInfo.Count % 10 == 0 || isWriteNow)
             {
-                using (var stream = new FileStream(_movieJsonFilePath, FileMode.Open))
+                using (var stream = new FileStream(_movieJsonFilePath, FileMode.OpenOrCreate))
                 {
                     StreamWriter sw = new StreamWriter(stream);
                     JsonSerializer serializer = new JsonSerializer
@@ -125,6 +137,37 @@ namespace Dy2018Crawler
                     
                 }
             }
+        }
+
+
+        /// <summary>
+        /// 从在线网页提取电影数据
+        /// </summary>
+        /// <param name="onlineURL"></param>
+        /// <returns></returns>
+        public static MovieInfo GetMovieInfoFromOnlineURL(string onlineURL)
+        {
+            var movieHTML = HTTPHelper.GetHTMLByURL(onlineURL);
+            var movieDoc = htmlParser.Parse(movieHTML);
+            var zoom = movieDoc.GetElementById("Zoom");
+            var lstDownLoadURL = movieDoc.QuerySelectorAll("[bgcolor='#fdfddf']");
+            var updatetime = movieDoc.QuerySelector("span.updatetime"); var pubDate = DateTime.Now;
+            if (updatetime != null && !string.IsNullOrEmpty(updatetime.InnerHtml))
+            {
+                DateTime.TryParse(updatetime.InnerHtml.Replace("发布时间：", ""), out pubDate);
+            }
+
+
+            var movieInfo = new MovieInfo()
+            {
+                MovieName = movieDoc.QuerySelector("div.title_all").FirstElementChild.InnerHtml,
+                Dy2018OnlineUrl = onlineURL,
+                MovieIntro = zoom != null ? WebUtility.HtmlEncode(zoom.InnerHtml) : "暂无介绍...",
+                XunLeiDownLoadURLList = lstDownLoadURL != null ?
+                lstDownLoadURL.Select(item=>item.QuerySelector("a").InnerHtml).ToList() : null,
+                PubDate = pubDate,
+            };
+            return movieInfo;
         }
 
     }

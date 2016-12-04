@@ -19,15 +19,82 @@ namespace Dy2018Crawler.Controllers
 
         private static HtmlParser htmlParser = new HtmlParser();
 
+        /// <summary>
+        /// 首页
+        /// </summary>
+        /// <param name="isRefresh"></param>
+        /// <returns></returns>
         public IActionResult Index(int isRefresh = 0)
         {
             List<MovieInfo> lstMovie = hotMovieList.GetListMoveInfo();
-            if(isRefresh!=0)
+            return View(lstMovie);
+        }
+
+        /// <summary>
+        /// 最新电影
+        /// </summary>
+        /// <param name="isRefresh"></param>
+        /// <param name="indexPageCount"></param>
+        /// <returns></returns>
+        public IActionResult LatestMovieList(int isRefresh = 0, int indexPageCount = 0)
+        {
+            List<MovieInfo> lstMovie = latestMovieList.GetListMoveInfo();
+            if (isRefresh != 0)
             {
-                AddToHotMovieList();
+                AddToLatestMovieList(isRefresh);
             }
             return View(lstMovie);
         }
+
+        /// <summary>
+        /// 订阅
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Receiver()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 刷新当前数据
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult RefreshMovie()
+        {
+            AddToHotMovieList();
+            AddToLatestMovieList();
+            return View();
+        }
+
+        /// <summary>
+        /// 显示电影详情
+        /// </summary>
+        /// <param name="onlineURL"></param>
+        /// <returns></returns>
+        public IActionResult ShowLatestMoiveInfo(string onlineURL)
+        {
+            return View(MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL));
+        }
+
+        public IActionResult ShowHotMoiveInfo(string onlineURL)
+        {
+            return View(MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL));
+        }
+
+
+        public IActionResult ShowMoiveDetail(string onlineURL)
+        {
+            return View(MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL));
+        }
+
+
+        public IActionResult Error()
+        {
+            return View();
+        }
+
+
+
 
         private void AddToHotMovieList()
         {
@@ -49,7 +116,7 @@ namespace Dy2018Crawler.Controllers
                                 var onlineURL = "http://www.dy2018.com" + a.GetAttribute("href");
                                 if (!hotMovieList.IsContainsMoive(onlineURL))
                                 {
-                                    MovieInfo movieInfo = FillMovieInfoFormWeb(a, onlineURL);
+                                    MovieInfo movieInfo = MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
                                     if (movieInfo.XunLeiDownLoadURLList != null && movieInfo.XunLeiDownLoadURLList.Count != 0)
                                         hotMovieList.AddToMovieDic(movieInfo);
                                 }
@@ -60,46 +127,13 @@ namespace Dy2018Crawler.Controllers
                 }
                 catch(Exception ex)
                 {
-
+                    LogHelper.Error("AddToHotMovieList Exception", ex);
                 }
             });
         }
 
-        private MovieInfo FillMovieInfoFormWeb(AngleSharp.Dom.IElement a, string onlineURL)
-        {
-            var movieHTML = HTTPHelper.GetHTMLByURL(onlineURL);
-            var movieDoc = htmlParser.Parse(movieHTML);
-            var zoom = movieDoc.GetElementById("Zoom");
-            var lstDownLoadURL = movieDoc.QuerySelectorAll("[bgcolor='#fdfddf']");
-            var updatetime = movieDoc.QuerySelector("span.updatetime"); var pubDate = DateTime.Now;
-            if(updatetime!=null && !string.IsNullOrEmpty(updatetime.InnerHtml))
-            {
-                DateTime.TryParse(updatetime.InnerHtml.Replace("发布时间：", ""), out pubDate);
-            }
-            
-
-            var movieInfo = new MovieInfo()
-            {
-                MovieName = a.InnerHtml.Replace("<font color=\"#0c9000\">","").Replace("<font color=\"	#0c9000\">","").Replace("</font>", ""),
-                Dy2018OnlineUrl = onlineURL,
-                MovieIntro = zoom != null ? WebUtility.HtmlEncode(zoom.InnerHtml) : "暂无介绍...",
-                XunLeiDownLoadURLList = lstDownLoadURL != null ?
-                lstDownLoadURL.Select(d => d.FirstElementChild.InnerHtml).ToList() : null,
-                PubDate = pubDate,
-            };
-            return movieInfo;
-        }
-
-        public IActionResult LatestMovieList(int isRefresh=0,int indexPageCount=0)
-        {
-            List<MovieInfo> lstMovie = latestMovieList.GetListMoveInfo();
-            if(isRefresh!=0)
-            {
-                AddToLatestMovieList(isRefresh);
-            }
-            return View(lstMovie);
-        }
-
+       
+       
         private void AddToLatestMovieList(int indexPageCount=0)
         {
             Task.Factory.StartNew(() =>
@@ -123,7 +157,7 @@ namespace Dy2018Crawler.Controllers
                                 var onlineURL = "http://www.dy2018.com" + a.GetAttribute("href");
                                 if (!latestMovieList.IsContainsMoive(onlineURL))
                                 {
-                                    MovieInfo movieInfo = FillMovieInfoFormWeb(a, onlineURL);
+                                    MovieInfo movieInfo = MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
                                     if (movieInfo.XunLeiDownLoadURLList != null && movieInfo.XunLeiDownLoadURLList.Count != 0)
                                         latestMovieList.AddToMovieDic(movieInfo);
                                 }
@@ -133,37 +167,10 @@ namespace Dy2018Crawler.Controllers
                 }
                 catch (Exception ex)
                 {
-
+                    LogHelper.Error("AddToLatestMovieList Exception", ex);
                 }
             });
         }
 
-        public IActionResult Receiver()
-        {
-            return View();
-        }
-
-        public IActionResult RefreshMovie()
-        {
-            AddToHotMovieList();
-            AddToLatestMovieList();
-            return View();
-        }
-
-        public IActionResult ShowLatestMoiveInfo(string onlineURL)
-        {
-            return View(latestMovieList.GetMovieInfo(onlineURL));
-        }
-
-        public IActionResult ShowHotMoiveInfo(string onlineURL)
-        {
-            return View(hotMovieList.GetMovieInfo(onlineURL));
-        }
-
-
-        public IActionResult Error()
-        {
-            return View();
-        }
-    }
+         }
 }

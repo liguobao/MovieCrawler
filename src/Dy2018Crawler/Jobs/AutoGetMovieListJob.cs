@@ -50,7 +50,7 @@ namespace Dy2018Crawler.Jobs
                                 var onlineURL = "http://www.dy2018.com" + a.GetAttribute("href");
                                 if (!latestMovieList.IsContainsMoive(onlineURL))
                                 {
-                                    MovieInfo movieInfo = FillMovieInfoFormWeb(a, onlineURL);
+                                    MovieInfo movieInfo = MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
                                     if (movieInfo.XunLeiDownLoadURLList != null && movieInfo.XunLeiDownLoadURLList.Count != 0)
                                         latestMovieList.AddToMovieDic(movieInfo);
                                 }
@@ -58,10 +58,10 @@ namespace Dy2018Crawler.Jobs
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-
-                }
+            catch (Exception ex)
+            {
+                LogHelper.Error("AddToLatestMovieList Exception", ex);
+            }
            
         }
 
@@ -84,7 +84,7 @@ namespace Dy2018Crawler.Jobs
                                 var onlineURL = "http://www.dy2018.com" + a.GetAttribute("href");
                                 if (!hotMovieList.IsContainsMoive(onlineURL))
                                 {
-                                    MovieInfo movieInfo = FillMovieInfoFormWeb(a, onlineURL);
+                                    MovieInfo movieInfo = MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
                                     if (movieInfo.XunLeiDownLoadURLList != null && movieInfo.XunLeiDownLoadURLList.Count != 0)
                                         hotMovieList.AddToMovieDic(movieInfo);
                                 }
@@ -95,35 +95,11 @@ namespace Dy2018Crawler.Jobs
                 }
                 catch (Exception ex)
                 {
-
+                   LogHelper.Error("AddToHotMovieList",ex);
                 }
           
         }
 
-        private MovieInfo FillMovieInfoFormWeb(AngleSharp.Dom.IElement a, string onlineURL)
-        {
-            var movieHTML = HTTPHelper.GetHTMLByURL(onlineURL);
-            var movieDoc = htmlParser.Parse(movieHTML);
-            var zoom = movieDoc.GetElementById("Zoom");
-            var lstDownLoadURL = movieDoc.QuerySelectorAll("[bgcolor='#fdfddf']");
-            var updatetime = movieDoc.QuerySelector("span.updatetime"); var pubDate = DateTime.Now;
-            if (updatetime != null && !string.IsNullOrEmpty(updatetime.InnerHtml))
-            {
-                DateTime.TryParse(updatetime.InnerHtml.Replace("发布时间：", ""), out pubDate);
-            }
-
-
-            var movieInfo = new MovieInfo()
-            {
-                MovieName = a.InnerHtml.Replace("<font color=\"#0c9000\">", "").Replace("<font color=\"	#0c9000\">", "").Replace("</font>", ""),
-                Dy2018OnlineUrl = onlineURL,
-                MovieIntro = zoom != null ? WebUtility.HtmlEncode(zoom.InnerHtml) : "暂无介绍...",
-                XunLeiDownLoadURLList = lstDownLoadURL != null ?
-                lstDownLoadURL.Select(d => d.FirstElementChild.InnerHtml).ToList() : null,
-                PubDate = pubDate,
-            };
-            return movieInfo;
-        }
-
+        
     }
 }

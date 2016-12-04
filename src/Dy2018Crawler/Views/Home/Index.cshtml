@@ -9,7 +9,7 @@
         <ul>
             @foreach (var movie in Model)
             {
-                <li><a href="@(Url.Action("ShowHotMoiveInfo")+"?onlineURL="+@movie.Dy2018OnlineUrl)" target="_blank">@movie.MovieName</a></li>
+                <li><a href="@(Url.Action("ShowMoiveDetail")+"?onlineURL="+@movie.Dy2018OnlineUrl)" target="_blank">@movie.MovieName</a></li>
             }
            
         </ul>
@@ -18,8 +18,21 @@
         <h2>DownLoadURL</h2>
         <ul>
            @foreach (var movie in Model)
-            {
-            <li><a href="@movie.XunLeiDownLoadURLList.FirstOrDefault()" target="_blank">@(movie.XunLeiDownLoadURLList.FirstOrDefault())</a></li>
+           {
+                <li><a href="@movie.XunLeiDownLoadURLList.FirstOrDefault(item => item.Contains("ftp"))" 
+                       target="_blank">@{ 
+                           var downloadURL = movie.XunLeiDownLoadURLList.FirstOrDefault(item => item.Contains("ftp"));
+                           if (String.IsNullOrEmpty(downloadURL))
+                           {
+                              <span>@movie.XunLeiDownLoadURLList.FirstOrDefault()</span>
+
+                           }
+                           else
+                           {
+                            <span>@downloadURL</span>
+                           }
+                    }
+                    </a></li>
            }
         </ul>
     </div>

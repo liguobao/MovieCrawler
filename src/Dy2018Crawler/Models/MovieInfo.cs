@@ -12,6 +12,7 @@ namespace Dy2018Crawler.Models
 
         public string Dy2018OnlineUrl { get; set; }
 
+        [JsonIgnoreAttribute]
         public string MovieIntro { get; set; }
 
         public DateTime PubDate { get; set; }
