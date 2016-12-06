@@ -95,6 +95,11 @@ namespace Dy2018Crawler
             return true;
         }
 
+        /// <summary>
+        /// 是否包含此电影
+        /// </summary>
+        /// <param name="onlieURL"></param>
+        /// <returns></returns>
         public  bool IsContainsMoive(string onlieURL)
         {
             return _cdMovieInfo.ContainsKey(onlieURL);

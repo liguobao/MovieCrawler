@@ -13,20 +13,15 @@ namespace Dy2018Crawler.Controllers
     public class HomeController : Controller
     {
 
-        private static MovieInfoHelper latestMovieList = new MovieInfoHelper(Path.Combine(ConstsConf.WWWRootPath, "latestMovie.json"));
-
-        private static MovieInfoHelper hotMovieList = new MovieInfoHelper(Path.Combine(ConstsConf.WWWRootPath, "hotMovie.json"));
-
-        private static HtmlParser htmlParser = new HtmlParser();
-
+       
         /// <summary>
         /// 首页
         /// </summary>
         /// <param name="isRefresh"></param>
         /// <returns></returns>
-        public IActionResult Index(int isRefresh = 0)
+        public IActionResult Index()
         {
-            List<MovieInfo> lstMovie = hotMovieList.GetListMoveInfo();
+            List<MovieInfo> lstMovie = HotMovieInfo.GetAllMovieInfo();
             return View(lstMovie);
         }
 
@@ -38,10 +33,10 @@ namespace Dy2018Crawler.Controllers
         /// <returns></returns>
         public IActionResult LatestMovieList(int isRefresh = 0, int indexPageCount = 0)
         {
-            List<MovieInfo> lstMovie = latestMovieList.GetListMoveInfo();
+            List<MovieInfo> lstMovie = LatestMovieInfo.GetAllMovieInfo();
             if (isRefresh != 0)
             {
-                AddToLatestMovieList(isRefresh);
+                LatestMovieInfo.CrawlLatestMovieInfo(indexPageCount);
             }
             return View(lstMovie);
         }
@@ -61,8 +56,8 @@ namespace Dy2018Crawler.Controllers
         /// <returns></returns>
         public IActionResult RefreshMovie()
         {
-            AddToHotMovieList();
-            AddToLatestMovieList();
+            LatestMovieInfo.CrawlLatestMovieInfo();
+            HotMovieInfo.CrawlHotMovie();
             return View();
         }
 
@@ -87,8 +82,8 @@ namespace Dy2018Crawler.Controllers
             var movieInfo = MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
             if(movieInfo==null)
             {
-               var  lasestMovieInfo = latestMovieList.GetMovieInfo(onlineURL);
-               var hotMovieInfo = hotMovieList.GetMovieInfo(onlineURL);
+               var  lasestMovieInfo = LatestMovieInfo.GetMovieInfoByOnlineURL(onlineURL);
+               var hotMovieInfo =HotMovieInfo.GetMovieInfoByOnlineURL (onlineURL);
                 if (lasestMovieInfo != null)
                     movieInfo = lasestMovieInfo;
                 else if(hotMovieInfo!=null)
@@ -104,83 +99,6 @@ namespace Dy2018Crawler.Controllers
         }
 
 
-
-
-        private void AddToHotMovieList()
-        {
-            Task.Factory.StartNew(()=> 
-            {
-                try
-                {
-                    var htmlDoc = HTTPHelper.GetHTMLByURL("http://www.dy2018.com/");
-                    var dom = htmlParser.Parse(htmlDoc);
-                    var lstDivInfo = dom.QuerySelectorAll("div.co_content222");
-                    if (lstDivInfo != null)
-                    {
-                        //前三个DIV为新电影
-                        foreach (var divInfo in lstDivInfo.Take(3))
-                        {
-                            divInfo.QuerySelectorAll("a").Where(a => a.GetAttribute("href").Contains("/i/")).ToList().ForEach(
-                            a =>
-                            {
-                                var onlineURL = "http://www.dy2018.com" + a.GetAttribute("href");
-                                if (!hotMovieList.IsContainsMoive(onlineURL))
-                                {
-                                    MovieInfo movieInfo = MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
-                                    if (movieInfo!=null&&movieInfo.XunLeiDownLoadURLList != null && movieInfo.XunLeiDownLoadURLList.Count != 0)
-                                        hotMovieList.AddToMovieDic(movieInfo);
-                                }
-                            });
-                        }
-                    }
-
-                }
-                catch(Exception ex)
-                {
-                    LogHelper.Error("AddToHotMovieList Exception", ex);
-                }
-            });
-        }
-
-       
-       
-        private void AddToLatestMovieList(int indexPageCount=0)
-        {
-            Task.Factory.StartNew(() =>
-            {
-                try
-                {
-                    indexPageCount = indexPageCount == 0 ? 3 : indexPageCount;
-                    //取前五页
-                    for (var i=1;i< indexPageCount; i++)
-                    {
-                        var index = i == 1 ? "" : "_" + i;
-                        var indexURL = $"http://www.dy2018.com/html/gndy/dyzz/index{index}.html";
-                        var htmlDoc = HTTPHelper.GetHTMLByURL(indexURL);
-                        var dom = htmlParser.Parse(htmlDoc);
-                        var lstDivInfo = dom.QuerySelectorAll("div.co_content8");
-                        if (lstDivInfo != null)
-                        {
-                            lstDivInfo.FirstOrDefault().QuerySelectorAll("a").Where(a => a.GetAttribute("href").Contains("/i/")).ToList()
-                            .ForEach(a =>
-                            {
-                                var onlineURL = "http://www.dy2018.com" + a.GetAttribute("href");
-                                if (!latestMovieList.IsContainsMoive(onlineURL))
-                                {
-                                    MovieInfo movieInfo = MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
-                                    if (movieInfo!=null&&movieInfo.XunLeiDownLoadURLList != null && movieInfo.XunLeiDownLoadURLList.Count != 0)
-                                        latestMovieList.AddToMovieDic(movieInfo);
-                                }
-                            });
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    LogHelper.Error("AddToLatestMovieList Exception", ex);
-                }
-            });
-        }
-
-         }
+        
+       }
 }
