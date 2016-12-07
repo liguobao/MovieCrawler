@@ -19,6 +19,7 @@ namespace Dy2018Crawler.Jobs
             LogHelper.Info("Start crawling");
             LatestMovieInfo.CrawlLatestMovieInfo(100);
             HotMovieInfo.CrawlHotMovie();
+            Btdytt520HotClickHelper.CrawlHotClickMovieInfo();
            // LogHelper.Info("Finish crawling");
         }
 

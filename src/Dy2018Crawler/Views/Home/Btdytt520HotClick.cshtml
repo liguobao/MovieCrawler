@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Btdytt520 HotClick";
+}
+@model List<Dy2018Crawler.Models.MovieInfo>
+
+<div class="row">
+    <div class="col-md-8">
+        <h2>Btdytt520 HotClick List</h2>
+        <ul>
+            @foreach (var movie in Model)
+            {
+                <li><a href="@(Url.Action("ShowBtdytt520MovieInfo")+"?onlineURL="+@movie.Dy2018OnlineUrl)" target="_blank">
+                    @movie.MovieName </a>
+                </li>
+
+                @*<span style="text-align:right">@("发布时间：" + movie.PubDate.ToString("yyyy-MM-dd"))</span>*@
+            }
+        </ul>
+    </div>
+ </div>

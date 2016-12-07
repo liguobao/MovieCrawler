@@ -17,7 +17,7 @@ namespace Dy2018Crawler
         /// </summary>
         /// <param name="onlineURL"></param>
         /// <returns></returns>
-        public static MovieInfo GetMovieInfoFromOnlineURL(string onlineURL)
+        public static MovieInfo GetMovieInfoFromOnlineURL(string onlineURL,bool isContainIntro=false)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace Dy2018Crawler
                     MovieName = movieName != null && movieName.QuerySelector("h1") != null ?
                     movieName.QuerySelector("h1").InnerHtml : "找不到影片信息...",
                     Dy2018OnlineUrl = onlineURL,
-                    MovieIntro = zoom != null ? WebUtility.HtmlEncode(zoom.InnerHtml) : "暂无介绍...",
+                    MovieIntro = zoom != null && isContainIntro ? WebUtility.HtmlEncode(zoom.InnerHtml) : "暂无介绍...",
                     XunLeiDownLoadURLList = lstOnlineURL,
                     PubDate = pubDate,
                 };

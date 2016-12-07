@@ -10,11 +10,11 @@ namespace Dy2018Crawler
 {
     public class Btdytt520MoviceInfo
     {
-        private static MovieInfoHelper btdytt520MoviceHelper = new MovieInfoHelper(Path.Combine(ConstsConf.WWWRootPath, "btdytt520Movice.json"));
+        private static MovieInfoHelper hotMoviceHelper = new MovieInfoHelper(Path.Combine(ConstsConf.WWWRootPath, "btdytt520HotMovice.json"));
 
         private static HtmlParser htmlParser = new HtmlParser();
 
-        public static void CrawlLatestMovieInfo()
+        public static void CrawlHostMovieInfo()
         {
             var indexURL = "http://www.btdytt520.com/movie/";
             var html = HTTPHelper.GetHTMLByURL(indexURL);
@@ -22,13 +22,17 @@ namespace Dy2018Crawler
                 return;
             var htmlDom = htmlParser.Parse(html);
             var divMovie = htmlDom.QuerySelector("div.index_Sidebar_cc");
-           var lstMovie = divMovie.QuerySelectorAll("a").Select(a => new MovieInfo()
-           {
-               Dy2018OnlineUrl = "http://www.btdytt520.com/" + a.GetAttribute("href"),
-               MovieName = a.InnerHtml
-           }).ToList();
+            divMovie.QuerySelectorAll("a").Select(a => a).ToList().ForEach(
+                a =>
+                {
+                    var aURL = "http://www.btdytt520.com" + a.GetAttribute("href");
+                    if(!hotMoviceHelper.IsContainsMoive(aURL))
+                    {
+                        hotMoviceHelper.AddToMovieDic(Btdytt520Helper.GetMovieInfoByOnlineURL(aURL));
+                    }
+                    
+                });
         }
-
 
         /// <summary>
         /// 获取全部的电影数据
@@ -36,15 +40,9 @@ namespace Dy2018Crawler
         /// <returns></returns>
         public static List<MovieInfo> GetAllMovieInfo()
         {
-            return btdytt520MoviceHelper.GetListMoveInfo(); ;
+            return hotMoviceHelper.GetListMoveInfo();
         }
 
-
-
-        public static MovieInfo GetMovieInfoByOnlineURL(string onlineURL)
-        {
-            return btdytt520MoviceHelper.GetMovieInfo(onlineURL);
-        }
 
     }
 }

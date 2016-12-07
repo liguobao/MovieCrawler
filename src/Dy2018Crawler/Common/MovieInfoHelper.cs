@@ -85,7 +85,7 @@ namespace Dy2018Crawler
         /// <returns></returns>
         public  bool AddToMovieDic(MovieInfo movieInfo)
         {
-            if (!_cdMovieInfo.ContainsKey(movieInfo.Dy2018OnlineUrl))
+            if (movieInfo!=null&&!_cdMovieInfo.ContainsKey(movieInfo.Dy2018OnlineUrl))
             {
                 WriteToJsonFile();
                 LogHelper.Info("Add Movie Success!");

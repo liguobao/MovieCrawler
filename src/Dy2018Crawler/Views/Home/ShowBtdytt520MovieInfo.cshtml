@@ -1,0 +1,37 @@
+﻿@model Dy2018Crawler.Models.MovieInfo
+@{
+    ViewData["Title"] = Model != null ? Model.MovieName : "没有找到影片信息....";
+}
+@if (Model != null)
+{
+    <h2>@Model.MovieName</h2>
+    @if (string.IsNullOrEmpty(Model.MovieIntro))
+    {
+        <p>获取简介失败......</p>
+
+        <p>
+            下载链接：
+            @{
+                var downloadURL = Model.XunLeiDownLoadURLList.FirstOrDefault(item => item.Contains("ftp"));
+                if (String.IsNullOrEmpty(downloadURL))
+                {
+                    <span>@Model.XunLeiDownLoadURLList.FirstOrDefault()</span>
+                }
+                else
+                {
+                    <span>@downloadURL</span>
+                }
+            }
+        </p>
+
+                }
+                else
+                {
+                    <p>@Html.Raw(System.Net.WebUtility.HtmlDecode(Model.MovieIntro))</p>
+                }
+
+                }
+                else
+                {
+                    <h2>没有找到影片信息....</h2>
+                }

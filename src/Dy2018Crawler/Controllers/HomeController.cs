@@ -41,9 +41,11 @@ namespace Dy2018Crawler.Controllers
             return View(lstMovie);
         }
 
-        public IActionResult Btdytt520Movie()
+        public IActionResult Btdytt520HotClick()
         {
-            return View(Btdytt520MoviceInfo.GetAllMovieInfo());
+            // Btdytt520MoviceInfo.CrawlHostMovieInfo();
+           // Btdytt520HotClickHelper.CrawlHotClickMovieInfo();
+            return View(Btdytt520HotClickHelper.GetAllMovieInfo());
         }
 
 
@@ -55,7 +57,6 @@ namespace Dy2018Crawler.Controllers
         /// <returns></returns>
         public IActionResult Receiver()
         {
-            Btdytt520MoviceInfo.CrawlLatestMovieInfo();
             return View();
         }
 
@@ -70,12 +71,9 @@ namespace Dy2018Crawler.Controllers
             return View();
         }
 
-       
-
-
         public IActionResult ShowMoiveDetail(string onlineURL)
         {
-            var movieInfo = Dy2018MoviceInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
+            var movieInfo = Dy2018MoviceInfoHelper.GetMovieInfoFromOnlineURL(onlineURL,true);
             if(movieInfo==null)
             {
                var  lasestMovieInfo = LatestMovieInfo.GetMovieInfoByOnlineURL(onlineURL);
@@ -88,6 +86,12 @@ namespace Dy2018Crawler.Controllers
             return View(movieInfo);
         }
 
+
+
+        public IActionResult ShowBtdytt520MovieInfo(string onlineURL)
+        {
+            return View(Btdytt520Helper.GetMovieInfoByOnlineURL(onlineURL,true));
+        }
 
         public IActionResult Error()
         {
