@@ -41,12 +41,21 @@ namespace Dy2018Crawler.Controllers
             return View(lstMovie);
         }
 
+        public IActionResult Btdytt520Movie()
+        {
+            return View(Btdytt520MoviceInfo.GetAllMovieInfo());
+        }
+
+
+
+
         /// <summary>
         /// 订阅
         /// </summary>
         /// <returns></returns>
         public IActionResult Receiver()
         {
+            Btdytt520MoviceInfo.CrawlLatestMovieInfo();
             return View();
         }
 
@@ -61,25 +70,12 @@ namespace Dy2018Crawler.Controllers
             return View();
         }
 
-        /// <summary>
-        /// 显示电影详情
-        /// </summary>
-        /// <param name="onlineURL"></param>
-        /// <returns></returns>
-        public IActionResult ShowLatestMoiveInfo(string onlineURL)
-        {
-            return View(MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL));
-        }
-
-        public IActionResult ShowHotMoiveInfo(string onlineURL)
-        {
-            return View(MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL));
-        }
+       
 
 
         public IActionResult ShowMoiveDetail(string onlineURL)
         {
-            var movieInfo = MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
+            var movieInfo = Dy2018MoviceInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
             if(movieInfo==null)
             {
                var  lasestMovieInfo = LatestMovieInfo.GetMovieInfoByOnlineURL(onlineURL);

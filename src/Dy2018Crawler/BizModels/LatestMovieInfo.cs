@@ -72,7 +72,7 @@ namespace Dy2018Crawler
                     var onlineURL = "http://www.dy2018.com" + a.GetAttribute("href");
                     if (!latestMovieList.IsContainsMoive(onlineURL))
                     {
-                        MovieInfo movieInfo = MovieInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
+                        MovieInfo movieInfo = Dy2018MoviceInfoHelper.GetMovieInfoFromOnlineURL(onlineURL);
                         if (movieInfo != null && movieInfo.XunLeiDownLoadURLList != null && movieInfo.XunLeiDownLoadURLList.Count != 0)
                             latestMovieList.AddToMovieDic(movieInfo);
                     }
