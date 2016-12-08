@@ -44,7 +44,9 @@ namespace Dy2018Crawler.Controllers
         public IActionResult Btdytt520HotClick()
         {
             // Btdytt520MoviceInfo.CrawlHostMovieInfo();
-           // Btdytt520HotClickHelper.CrawlHotClickMovieInfo();
+            // Btdytt520HotClickHelper.CrawlHotClickMovieInfo();
+            
+
             return View(Btdytt520HotClickHelper.GetAllMovieInfo());
         }
 
@@ -90,6 +92,7 @@ namespace Dy2018Crawler.Controllers
 
         public IActionResult ShowBtdytt520MovieInfo(string onlineURL)
         {
+            ViewBag.OnlineURL = onlineURL;
             return View(Btdytt520Helper.GetMovieInfoByOnlineURL(onlineURL,true));
         }
 
