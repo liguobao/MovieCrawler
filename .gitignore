@@ -5,3 +5,5 @@
 /src/Dy2018Crawler/wwwroot/NLogFile/*.log
 /src/Dy2018CrawlerWithDB/bin
 /src/Dy2018CrawlerWithDB/obj
+/src/Dy2018CrawlerForDB/obj
+/src/Dy2018CrawlerForDB/bin

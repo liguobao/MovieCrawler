@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Hot Movie";
+}
+@model List<Dy2018CrawlerWithDB.Models.MovieInfo>
+
+<div class="row">
+    <div class="col-md-5">
+        <h2>Movie List</h2>
+        <ul>
+            @foreach (var movie in Model)
+            {
+                <li><a href="@(Url.Action("ShowMoiveDetail")+"?onlineURL="+@movie.OnlineUrl)" target="_blank">@movie.MovieName</a></li>
+            }
+           
+        </ul>
+    </div>
+    <div class="col-md-7">
+        <h2>DownLoadURL</h2>
+        <ul>
+           @foreach (var movie in Model)
+           {
+                <li><a href="@movie.XunLeiDownLoadURLList.Split(';').FirstOrDefault(item => item.Contains("ftp"))" 
+                       target="_blank">@{ 
+                           var downloadURL = movie.XunLeiDownLoadURLList.Split(';').FirstOrDefault(item => item.Contains("ftp"));
+                           if (String.IsNullOrEmpty(downloadURL))
+                           {
+                              <span>@movie.XunLeiDownLoadURLList.FirstOrDefault()</span>
+
+                           }
+                           else
+                           {
+                            <span>@downloadURL</span>
+                           }
+                    }
+                    </a></li>
+           }
+        </ul>
+    </div>
+</div>
