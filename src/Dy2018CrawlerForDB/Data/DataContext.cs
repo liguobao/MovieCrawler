@@ -12,8 +12,8 @@ namespace Dy2018CrawlerWithDB.Data
         public DbSet<MovieInfo> Movies { set; get; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder
-            .UseMySql(@"Server=.;database=***;uid=***;pwd=***;CharSet=utf8;");
+            => optionsBuilder
+            .UseMySql(@"");
 
     }
 }

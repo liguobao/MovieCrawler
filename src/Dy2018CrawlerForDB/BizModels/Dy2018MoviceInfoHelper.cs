@@ -55,5 +55,54 @@ namespace Dy2018CrawlerWithDB
 
         }
 
+
+        /// <summary>
+        /// 从在线网页提取电影数据
+        /// </summary>
+        /// <param name="onlineURL"></param>
+        /// <returns></returns>
+        public static MovieInfo GetMovieInfoFromURL(string onlineURL)
+        {
+            try
+            {
+                var movieHTML = HTTPHelper.GetHTMLByURL(onlineURL);
+                if (string.IsNullOrEmpty(movieHTML))
+                    return null;
+                var movieDoc = htmlParser.Parse(movieHTML);
+                var zoom = movieDoc.GetElementById("Zoom");
+                var lstDownLoadURL = movieDoc.QuerySelectorAll("[bgcolor='#fdfddf']");
+                var updatetime = movieDoc.QuerySelector("span.updatetime"); var pubDate = DateTime.Now;
+                if (updatetime != null && !string.IsNullOrEmpty(updatetime.InnerHtml))
+                {
+                    DateTime.TryParse(updatetime.InnerHtml.Replace("发布时间：", ""), out pubDate);
+                }
+                var lstURL = lstDownLoadURL.Select(a => a.QuerySelector("a")).Where(item => item != null).Select(item => item.InnerHtml).ToList();
+
+                var movieName = movieDoc.QuerySelector("div.title_all");
+
+                var movieInfo = new MovieInfo()
+                {
+                    MovieName = movieName != null && movieName.QuerySelector("h1") != null ?
+                    movieName.QuerySelector("h1").InnerHtml : "找不到影片信息...",
+                    OnlineUrl = onlineURL,
+                    MovieIntro = zoom != null ? zoom.InnerHtml : "暂无介绍...",
+                    DownLoadURLList = string.Join(";", lstURL),
+                    PubDate = pubDate.Date,
+                    DataCreateTime = DateTime.Now,
+                    SoureceDomain = SoureceDomainConsts.Dy2018Domain,
+                    //MovieType=(int)MovieTypeEnum.Latest
+                };
+                return movieInfo;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error("GetMovieInfoFromURL Exception", ex, new { OnloneURL = onlineURL });
+                return null;
+            }
+
+        }
+
+       
+        
     }
 }

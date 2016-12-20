@@ -9,27 +9,30 @@ namespace Dy2018CrawlerWithDB.Models
 {
     public class MovieInfo
     {
-        
-        public long Id { get; set; }
 
-        [MaxLength(200)]
+        public Guid Id { get; set; }
+
+        [MaxLength(512)]
         public string MovieName { get; set; }
 
-        [MaxLength(200)]
+        [MaxLength(512)]
         public string OnlineUrl { get; set; }
 
-        [MaxLength(65400)]
+
         public string MovieIntro { get; set; }
+
 
         public DateTime PubDate { get; set; }
 
         public int MovieType { get; set; }
 
-        [MaxLength(200)]
+        [MaxLength(512)]
         public string SoureceDomain { get; set; }
 
-        [MaxLength(1000)]
-        public string XunLeiDownLoadURLList { get; set; }
+        [MaxLength(1024)]
+        public string DownLoadURLList { get; set; }
+
+        public DateTime DataCreateTime { get; set; }
     }
 
 

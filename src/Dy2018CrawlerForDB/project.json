@@ -25,7 +25,6 @@
     "System.Text.Encoding.CodePages": "4.3.0",
     "Pomelo.AspNetCore.TimedJob": "1.1.0-rtm-10026",
     "NLog.Extensions.Logging": "1.0.0-rtm-alpha4",
-    "MySql.Data": "7.0.6-IR31",
     "Pomelo.EntityFrameworkCore.MySql": "1.1.1-prerelease-10002"
   },
 
