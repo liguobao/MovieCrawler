@@ -9,4 +9,12 @@ namespace Dy2018CrawlerWithDB
     {
         public static string WWWRootPath = "";
     }
+
+    public class SoureceDomainConsts
+    {
+        public const string Dy2018Domain = "www.dy2018.com";
+
+        public const string BTdytt520 = "www.btdytt520.com";
+
+    }
 }

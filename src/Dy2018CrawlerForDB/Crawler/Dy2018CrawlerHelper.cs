@@ -8,9 +8,9 @@ using Dy2018CrawlerWithDB;
 using Dy2018CrawlerWithDB.Data;
 using Dy2018CrawlerWithDB.Models;
 
-namespace Dy2018CrawlerWithDB.BizModels
+namespace Dy2018CrawlerWithDB
 {
-    public class Dy2018CrawlerInfo
+    public class Dy2018CrawlerHelper
     {
         private static  DataContext movieDataContent { get; } = new DataContext();
 

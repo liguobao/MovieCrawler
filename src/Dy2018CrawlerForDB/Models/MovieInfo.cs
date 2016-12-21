@@ -48,11 +48,5 @@ namespace Dy2018CrawlerWithDB.Models
         Latest = 2,
     }
 
-    public class SoureceDomainConsts
-    {
-        public const string Dy2018Domain = "www.dy2018.com";
-
-        public const string BTdytt520 = "www.btdytt520.com";
-
-    }
+  
 }

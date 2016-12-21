@@ -9,7 +9,7 @@ using Dy2018CrawlerWithDB.Models;
 
 namespace Dy2018CrawlerWithDB
 {
-    public class Btdytt520MoviceInfo
+    public class Btdytt520CrawlerHelper
     {
        
         private static HtmlParser htmlParser = new HtmlParser();

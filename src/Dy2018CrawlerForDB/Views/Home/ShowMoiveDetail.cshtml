@@ -11,10 +11,10 @@
 
         <p>下载链接：
            @{
-               var downloadURL = Model.XunLeiDownLoadURLList.Split(';').FirstOrDefault(item => item.Contains("ftp"));
+               var downloadURL = Model.DownLoadURLList.Split(';').FirstOrDefault(item => item.Contains("ftp"));
                if (String.IsNullOrEmpty(downloadURL))
                {
-                   <span>@Model.XunLeiDownLoadURLList</span>
+                   <span>@Model.DownLoadURLList</span>
                }
                else
                {

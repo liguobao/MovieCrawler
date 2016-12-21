@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using AngleSharp.Parser.Html;
-using Dy2018CrawlerWithDB.BizModels;
 using Dy2018CrawlerWithDB.Data;
 using Dy2018CrawlerWithDB.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +22,7 @@ namespace Dy2018CrawlerWithDB.Controllers
             var lstDy2018HotMovie = new List<MovieInfo>();
             lstDy2018HotMovie = movieDataContent.Movies.Where(
                    mo => mo.MovieType == (int)MovieTypeEnum.Hot
-                   && mo.SoureceDomain == SoureceDomainConsts.Dy2018Domain && mo.PubDate > DateTime.Now.Date.AddDays(-14)
+                   && mo.SoureceDomain == SoureceDomainConsts.Dy2018Domain && mo.PubDate > DateTime.Now.Date.AddDays(-30)
                    ).ToList();
             return View(lstDy2018HotMovie);
         }

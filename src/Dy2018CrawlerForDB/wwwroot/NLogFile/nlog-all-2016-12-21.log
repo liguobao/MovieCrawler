@@ -1,0 +1,12 @@
+2016-12-21 23:45:27.9932|ERROR|GetHTMLByURL ExceptionSystem.UriFormatException: Invalid URI: The format of the URI could not be determined.
+   at System.Uri.CreateThis(String uri, Boolean dontEscape, UriKind uriKind)
+   at Dy2018CrawlerWithDB.HTTPHelper.CrawlerProxyInfo..ctor(String proxyUri) in C:\code\github\Dy2018Crawler\src\Dy2018CrawlerForDB\Common\HTTPHelper.cs:line 18
+   at Dy2018CrawlerWithDB.HTTPHelper.GetHTMLByURL(String url) in C:\code\github\Dy2018Crawler\src\Dy2018CrawlerForDB\Common\HTTPHelper.cs:line 61 
+2016-12-21 23:46:41.7422|ERROR|GetHTMLByURL ExceptionSystem.UriFormatException: Invalid URI: The format of the URI could not be determined.
+   at System.Uri.CreateThis(String uri, Boolean dontEscape, UriKind uriKind)
+   at Dy2018CrawlerWithDB.HTTPHelper.CrawlerProxyInfo..ctor(String proxyUri) in C:\code\github\Dy2018Crawler\src\Dy2018CrawlerForDB\Common\HTTPHelper.cs:line 18
+   at Dy2018CrawlerWithDB.HTTPHelper.GetHTMLByURL(String url) in C:\code\github\Dy2018Crawler\src\Dy2018CrawlerForDB\Common\HTTPHelper.cs:line 61 
+2016-12-21 23:52:31.8374|ERROR|GetHTMLByURL ExceptionSystem.UriFormatException: Invalid URI: The URI scheme is not valid.
+   at System.Uri.CreateThis(String uri, Boolean dontEscape, UriKind uriKind)
+   at Dy2018CrawlerWithDB.HTTPHelper.CrawlerProxyInfo..ctor(String proxyUri) in C:\code\github\Dy2018Crawler\src\Dy2018CrawlerForDB\Common\HTTPHelper.cs:line 18
+   at Dy2018CrawlerWithDB.HTTPHelper.GetHTMLByURL(String url) in C:\code\github\Dy2018Crawler\src\Dy2018CrawlerForDB\Common\HTTPHelper.cs:line 61 
