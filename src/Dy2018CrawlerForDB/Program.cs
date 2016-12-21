@@ -12,7 +12,7 @@ namespace Dy2018CrawlerWithDB
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
-                .UseUrls("http://*:20000")
+                .UseUrls("http://*:30000")
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
