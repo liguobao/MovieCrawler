@@ -17,10 +17,10 @@ namespace Dy2018CrawlerWithDB.Jobs
         public void Run()
         {
             LogHelper.Info("Start crawling");
-            LatestMovieInfo.CrawlLatestMovieInfo(100);
-            HotMovieInfo.CrawlHotMovie();
-            Btdytt520HotClickHelper.CrawlHotClickMovieInfo();
-           // LogHelper.Info("Finish crawling");
+           
+
+
+            LogHelper.Info("Finish crawling");
         }
 
     

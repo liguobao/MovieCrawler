@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -7,6 +9,7 @@ namespace Dy2018CrawlerWithDB
 {
     public class HTTPHelper
     {
+        public static List<string> lstProxyIP = new List<string>() { };
 
         public static HttpClient Client { get; } = new HttpClient();
 
@@ -15,6 +18,7 @@ namespace Dy2018CrawlerWithDB
             try
             {
                 System.Net.WebRequest wRequest = System.Net.WebRequest.Create(url);
+                wRequest.Proxy = WebRequest.DefaultWebProxy;
                 wRequest.ContentType = "text/html; charset=gb2312";
 
                 wRequest.Method = "get";

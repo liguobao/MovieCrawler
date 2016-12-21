@@ -4,15 +4,16 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AngleSharp.Parser.Html;
+using Dy2018CrawlerWithDB.Data;
 using Dy2018CrawlerWithDB.Models;
 
 namespace Dy2018CrawlerWithDB
 {
     public class Btdytt520MoviceInfo
     {
-        private static MovieInfoHelper hotMoviceHelper = new MovieInfoHelper(Path.Combine(ConstsConf.WWWRootPath, "btdytt520HotMovice.json"));
-
+       
         private static HtmlParser htmlParser = new HtmlParser();
+        private static DataContext movieDataContent { get; } = new DataContext();
 
         public static void CrawlHostMovieInfo()
         {
@@ -25,23 +26,22 @@ namespace Dy2018CrawlerWithDB
             divMovie.QuerySelectorAll("a").Select(a => a).ToList().ForEach(
                 a =>
                 {
-                    var aURL = "http://www.btdytt520.com" + a.GetAttribute("href");
-                    if(!hotMoviceHelper.IsContainsMoive(aURL))
+                    var onlineURL = "http://www.btdytt520.com" + a.GetAttribute("href");
+                    if (movieDataContent.Movies.FirstOrDefault(mo => mo.OnlineUrl == onlineURL) == null)
                     {
-                        hotMoviceHelper.AddToMovieDic(Btdytt520Helper.GetMovieInfoByOnlineURL(aURL));
+                        var movieInfo = Btdytt520Helper.GetMovieInfoURL(onlineURL);
+                        if (movieInfo != null)
+                        {
+                            movieInfo.MovieType = (int)MovieTypeEnum.Latest;
+                            movieDataContent.Movies.Add(movieInfo);
+                        }
                     }
-                    
+
                 });
+            movieDataContent.SaveChanges();
+
         }
 
-        /// <summary>
-        /// 获取全部的电影数据
-        /// </summary>
-        /// <returns></returns>
-        public static List<BizMovieInfo> GetAllMovieInfo()
-        {
-            return hotMoviceHelper.GetListMoveInfo();
-        }
 
 
     }
