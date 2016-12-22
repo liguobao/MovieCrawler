@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AngleSharp.Parser.Html;
-using Dy2018CrawlerWithDB;
 using Dy2018CrawlerWithDB.Data;
 using Dy2018CrawlerWithDB.Models;
 
@@ -113,7 +112,7 @@ namespace Dy2018CrawlerWithDB
             var htmlDoc = HTTPHelper.GetHTMLByURL(indexURL);
             var dom = htmlParser.Parse(htmlDoc);
             var lstDivInfo = dom.QuerySelectorAll("div.co_content8");
-            if (lstDivInfo != null)
+            if (lstDivInfo != null && lstDivInfo.Count()>0)
             {
                 lstDivInfo.FirstOrDefault().QuerySelectorAll("a").Where(a => a.GetAttribute("href").Contains("/i/")).ToList()
                 .ForEach(a =>

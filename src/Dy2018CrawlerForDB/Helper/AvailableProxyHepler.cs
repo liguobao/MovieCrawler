@@ -10,7 +10,9 @@ using Newtonsoft.Json.Converters;
 namespace Dy2018Crawler.Helper
 {
 
-    
+    /// <summary>
+    /// 代理IP数据
+    /// </summary>
     public class ProxyInfo
     {
         /// <summary>

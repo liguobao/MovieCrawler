@@ -17,6 +17,12 @@ namespace Dy2018CrawlerWithDB
         {
             Logger.Error(message+ex.ToString(),ex,oj);
         }
-       
+
+        public static void Error(string message, Exception ex, string info)
+        {
+            Logger.Error(message + ex.ToString() + "Info:"+info, ex,info);
+        }
+
+
     }
 }
