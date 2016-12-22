@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dy2018CrawlerWithDB.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -61,8 +62,10 @@ namespace Dy2018CrawlerWithDB
             });
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             ConstsConf.WWWRootPath = env.WebRootPath;
+            //新建相关表
+            new DataContext().Database.EnsureCreated();
 
-           
+
         }
     }
 }

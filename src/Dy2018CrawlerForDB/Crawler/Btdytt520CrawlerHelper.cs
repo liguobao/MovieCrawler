@@ -42,7 +42,5 @@ namespace Dy2018CrawlerWithDB
 
         }
 
-
-
     }
 }
