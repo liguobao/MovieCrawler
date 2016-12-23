@@ -13,12 +13,15 @@ namespace Dy2018CrawlerWithDB
     {
        
         private static HtmlParser htmlParser = new HtmlParser();
+
         private static DataContext movieDataContent { get; } = new DataContext();
 
         public static void CrawlHostMovieInfo()
         {
+            int newMovieCount = 0;
+
             var indexURL = "http://www.btdytt520.com/movie/";
-            var html = HTTPHelper.GetHTMLByURL(indexURL);
+            var html = HTTPHelper.GetHTMLByURL(indexURL,true);
             if (string.IsNullOrEmpty(html))
                 return;
             var htmlDom = htmlParser.Parse(html);
@@ -34,11 +37,14 @@ namespace Dy2018CrawlerWithDB
                         {
                             movieInfo.MovieType = (int)MovieTypeEnum.Latest;
                             movieDataContent.Movies.Add(movieInfo);
+                            newMovieCount++;
                         }
                     }
 
                 });
             movieDataContent.SaveChanges();
+
+            LogHelper.Info($"Finish Btdytt520 CrawlHostMovieInfo,New Data Count:{newMovieCount}");
 
         }
 

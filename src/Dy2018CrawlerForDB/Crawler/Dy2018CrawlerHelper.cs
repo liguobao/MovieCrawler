@@ -63,6 +63,7 @@ namespace Dy2018CrawlerWithDB
             {
                 try
                 {
+                    var newMovieCount = 0;
                     LogHelper.Info("CrawlHotMovie Start...");
                     var htmlDoc = HTTPHelper.GetHTMLByURL("http://www.dy2018.com/");
                     var dom = htmlParser.Parse(htmlDoc);
@@ -83,6 +84,7 @@ namespace Dy2018CrawlerWithDB
                                     {
                                         movieInfo.MovieType = (int)MovieTypeEnum.Latest;
                                         movieDataContent.Movies.Add(movieInfo);
+                                        newMovieCount++;
                                     }
 
                                 }
@@ -90,7 +92,7 @@ namespace Dy2018CrawlerWithDB
                         }
                         movieDataContent.SaveChanges();
                     }
-
+                    LogHelper.Info($"Finish Dy2018 CrawlerMovieInfoFromOnline,New Data Count:{newMovieCount}");
                     LogHelper.Info("CrawlHotMovie Finish...");
 
                 }
@@ -108,7 +110,7 @@ namespace Dy2018CrawlerWithDB
         /// <param name="i"></param>
         private static void CrawlerMovieInfoFromOnline(string indexURL)
         {
-
+            var newMovieCount = 0;
             var htmlDoc = HTTPHelper.GetHTMLByURL(indexURL);
             var dom = htmlParser.Parse(htmlDoc);
             var lstDivInfo = dom.QuerySelectorAll("div.co_content8");
@@ -125,12 +127,15 @@ namespace Dy2018CrawlerWithDB
                         {
                             movieInfo.MovieType = (int)MovieTypeEnum.Latest;
                             movieDataContent.Movies.Add(movieInfo);
+                            newMovieCount++;
                         }
                         
                     }
                 });
                 movieDataContent.SaveChanges();
+              
             }
+            LogHelper.Info($"Finish Dy2018 CrawlerMovieInfoFromOnline,New Data Count:{newMovieCount}");
         }
     }
 }

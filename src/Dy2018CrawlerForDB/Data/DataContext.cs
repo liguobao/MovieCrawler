@@ -16,7 +16,9 @@ namespace Dy2018CrawlerWithDB.Data
         /// </summary>
         /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
-            .UseMySql(@"Server=***;database=moviecrawler;uid=***;pwd=***;CharSet=utf8;");
+         => optionsBuilder
+         .UseMySql(@"Server=*;database=moviecrawler;uid=***;pwd=***;CharSet=utf8;");
+
+
     }
 }

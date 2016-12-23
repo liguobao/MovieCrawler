@@ -10,12 +10,10 @@ namespace Dy2018CrawlerWithDB
     public class Btdytt520Helper
     {
         private static HtmlParser htmlParser = new HtmlParser();
-
-
        
         public static MovieInfo GetMovieInfoURL(string onlineURL)
         {
-            var html = HTTPHelper.GetHTMLByURL(onlineURL);
+            var html = HTTPHelper.GetHTMLByURL(onlineURL,true);
             if (string.IsNullOrEmpty(html))
                 return null;
             var htmlDom = htmlParser.Parse(html);

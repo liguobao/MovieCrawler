@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AngleSharp.Parser.Html;
 using Dy2018CrawlerWithDB.Data;
 using Dy2018CrawlerWithDB.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -69,7 +70,12 @@ namespace Dy2018CrawlerWithDB.Controllers
         /// <returns></returns>
         public IActionResult RefreshMovie()
         {
-          
+            LogHelper.Info("Start crawling");
+            Btdytt520CrawlerHelper.CrawlHostMovieInfo();
+            Dy2018CrawlerHelper.CrawlLatestMovieInfo(10);
+            Dy2018CrawlerHelper.CrawlHotMovie();
+
+            LogHelper.Info("Finish crawling");
             return View();
         }
 

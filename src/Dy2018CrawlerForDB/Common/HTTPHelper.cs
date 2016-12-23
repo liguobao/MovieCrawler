@@ -49,7 +49,7 @@ namespace Dy2018CrawlerWithDB
         public static HttpClient Client { get; } = new HttpClient();
 
         /// <summary>
-        /// 通过HTTP获取HTML（默认使用代理）
+        /// 通过HTTP获取HTML（默认不使用代理）
         /// </summary>
         /// <param name="url"></param>
         /// <param name="isUseProxy"></param>
