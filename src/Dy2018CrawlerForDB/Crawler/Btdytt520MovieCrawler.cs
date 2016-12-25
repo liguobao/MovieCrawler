@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AngleSharp.Parser.Html;
 using Dy2018CrawlerWithDB.Data;
@@ -9,7 +10,7 @@ using Dy2018CrawlerWithDB.Models;
 
 namespace Dy2018CrawlerWithDB
 {
-    public class Btdytt520CrawlerHelper
+    public class Btdytt520MovieCrawler
     {
        
         private static HtmlParser htmlParser = new HtmlParser();
@@ -27,9 +28,14 @@ namespace Dy2018CrawlerWithDB
                     int newMovieCount = 0;
 
                     var indexURL = "http://www.btdytt520.com/movie/";
-                    var html = HTTPHelper.GetHTMLByURL(indexURL);
+
+                    string html = GetHTMLByHTTPWebRequest(indexURL);
+
                     if (string.IsNullOrEmpty(html))
                         return;
+
+                    LogHelper.Info("Btdytt520 GetHTMLByHTTPWebRequest Success!");
+
                     var htmlDom = htmlParser.Parse(html);
                     var divMovie = htmlDom.QuerySelector("div.index_Sidebar_cc");
                     divMovie.QuerySelectorAll("a").Select(a => a).ToList().ForEach(
@@ -55,7 +61,7 @@ namespace Dy2018CrawlerWithDB
                     #endregion
 
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     LogHelper.Error("Btdytt520 CrawlHostMovieInfo Exception", ex);
                 }
@@ -65,6 +71,34 @@ namespace Dy2018CrawlerWithDB
             });
         }
 
+        private static string GetHTMLByHTTPWebRequest(string indexURL)
+        {
+            HttpWebRequest httpWebRequest = WebRequest.CreateHttp(indexURL);
+            AddCookies(httpWebRequest);
+            var html = HTTPHelper.GetHTML(httpWebRequest);
+            return html;
+        }
+
+        private static void AddCookies(HttpWebRequest httpWebRequest)
+        {
+            httpWebRequest.CookieContainer = new CookieContainer() { };
+            httpWebRequest.CookieContainer.Add(new Uri("http://www.btdytt520.com"),
+                new Cookie() { Name = "JXD705135", Value = "1", Path = "/" });
+            httpWebRequest.CookieContainer.Add(new Uri("http://www.btdytt520.com"),
+               new Cookie() { Name = "JXD730293", Value = "1", Path = "/" });
+            httpWebRequest.CookieContainer.Add(new Uri("http://www.btdytt520.com"),
+               new Cookie() { Name = "JXM705135", Value = "1", Path = "/" });
+            httpWebRequest.CookieContainer.Add(new Uri("http://www.btdytt520.com"),
+               new Cookie() { Name = "JXM730293", Value = "1", Path = "/" });
+
+            //httpWebRequest.CookieContainer.Add(new Uri("http://www.btdytt520.com"),
+            //   new Cookie() { Name = "JXS705135	", Value = "1", Path = "/" });
+            //httpWebRequest.CookieContainer.Add(new Uri("http://www.btdytt520.com"),
+            // new Cookie() { Name = "JXS730293", Value = "1", Path = "/" });
+
+            httpWebRequest.CookieContainer.Add(new Uri("http://www.btdytt520.com"),
+            new Cookie() { Name = "CNZZDATA1254168247", Value = "1890928383-1481026152-null%7C1482640111", Path = "/" });
+        }
 
 
 
@@ -72,7 +106,7 @@ namespace Dy2018CrawlerWithDB
         {
             try
             {
-                var html = HTTPHelper.GetHTMLByURL(onlineURL);
+                var html = GetHTMLByHTTPWebRequest(onlineURL);
                 if (string.IsNullOrEmpty(html))
                     return null;
                 var htmlDom = htmlParser.Parse(html);

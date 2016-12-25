@@ -71,9 +71,9 @@ namespace Dy2018CrawlerWithDB.Controllers
         public IActionResult RefreshMovie()
         {
             LogHelper.Info("RefreshMovie Start crawling");
-            Btdytt520CrawlerHelper.CrawlHostMovieInfo();
-            Dy2018CrawlerHelper.CrawlLatestMovieInfo(10);
-            Dy2018CrawlerHelper.CrawlHotMovie();
+            Btdytt520MovieCrawler.CrawlHostMovieInfo();
+            Dy2018MovieCrawler.CrawlLatestMovieInfo(50);
+            Dy2018MovieCrawler.CrawlHotMovie();
 
             LogHelper.Info("RefreshMovie Finish crawling");
             return View();

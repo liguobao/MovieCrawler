@@ -9,7 +9,7 @@ using Dy2018CrawlerWithDB.Models;
 
 namespace Dy2018CrawlerWithDB
 {
-    public class Dy2018CrawlerHelper
+    public class Dy2018MovieCrawler
     {
         private static  DataContext movieDataContent { get; } = new DataContext();
 
