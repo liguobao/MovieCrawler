@@ -20,5 +20,7 @@ namespace Dy2018CrawlerWithDB.Data
          .UseMySql(@"Server=*;database=moviecrawler;uid=***;pwd=***;CharSet=utf8;");
 
 
+
+
     }
 }

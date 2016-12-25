@@ -40,7 +40,11 @@ namespace Dy2018CrawlerWithDB
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             env.ConfigureNLog("nlog.config");
+            
             app.UseTimedJob();
+
+            //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            //loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
             {
@@ -65,6 +69,7 @@ namespace Dy2018CrawlerWithDB
             //新建相关表
             new DataContext().Database.EnsureCreated();
 
+            //LogHelper.Info("App Startup Configure...");
 
         }
     }

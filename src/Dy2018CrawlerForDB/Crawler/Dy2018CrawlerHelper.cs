@@ -26,7 +26,7 @@ namespace Dy2018CrawlerWithDB
             {
                 try
                 {
-                    LogHelper.Info("CrawlLatestMovieInfo Start...");
+                    LogHelper.Info("Dy2018 CrawlLatestMovieInfo Start...");
                     indexPageCount = indexPageCount == 0 ? 3 : indexPageCount;
                     //取前五页
                     for (var i = 1; i < indexPageCount; i++)
@@ -44,11 +44,11 @@ namespace Dy2018CrawlerWithDB
 
                     }
 
-                    LogHelper.Info("CrawlLatestMovieInfo Finish!");
+                    LogHelper.Info("Dy2018 CrawlLatestMovieInfo Finish!");
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.Error("CrawlLatestMovieInfo Exception", ex);
+                    LogHelper.Error("Dy2018 CrawlLatestMovieInfo Exception", ex);
                 }
             });
         }
@@ -64,8 +64,9 @@ namespace Dy2018CrawlerWithDB
                 try
                 {
                     var newMovieCount = 0;
-                    LogHelper.Info("CrawlHotMovie Start...");
+                    LogHelper.Info("Dy2018 CrawlHotMovie Start...");
                     var htmlDoc = HTTPHelper.GetHTMLByURL("http://www.dy2018.com/");
+                    htmlDoc = GetHTMLOnJumpWebPage(htmlDoc);
                     var dom = htmlParser.Parse(htmlDoc);
                     var lstDivInfo = dom.QuerySelectorAll("div.co_content222");
                     if (lstDivInfo != null)
@@ -79,11 +80,11 @@ namespace Dy2018CrawlerWithDB
                                 var onlineURL = "http://www.dy2018.com" + a.GetAttribute("href");
                                 if (movieDataContent.Movies.FirstOrDefault(mo => mo.OnlineUrl == onlineURL) == null)
                                 {
-                                    var movieInfo = Dy2018MoviceInfoHelper.GetMovieInfoFromURL(onlineURL);
+                                    var movieInfo = GetMovieInfoFromURL(onlineURL);
                                     if (movieInfo != null)
                                     {
                                         movieInfo.MovieType = (int)MovieTypeEnum.Latest;
-                                        movieDataContent.Movies.Add(movieInfo);
+                                        movieDataContent.Add(movieInfo);
                                         newMovieCount++;
                                     }
 
@@ -92,13 +93,12 @@ namespace Dy2018CrawlerWithDB
                         }
                         movieDataContent.SaveChanges();
                     }
-                    LogHelper.Info($"Finish Dy2018 CrawlerMovieInfoFromOnline,New Data Count:{newMovieCount}");
-                    LogHelper.Info("CrawlHotMovie Finish...");
+                    LogHelper.Info($"Finish Dy2018 CrawlHotMovie,New Data Count:{newMovieCount}");
 
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.Error("CrawlHotMovie Exception", ex);
+                    LogHelper.Error("Dy2018 CrawlHotMovie Exception", ex);
                 }
             });
         }
@@ -112,31 +112,98 @@ namespace Dy2018CrawlerWithDB
         {
             var newMovieCount = 0;
             var htmlDoc = HTTPHelper.GetHTMLByURL(indexURL);
+            htmlDoc = GetHTMLOnJumpWebPage(htmlDoc);
+
             var dom = htmlParser.Parse(htmlDoc);
             var lstDivInfo = dom.QuerySelectorAll("div.co_content8");
-            if (lstDivInfo != null && lstDivInfo.Count()>0)
+            if (lstDivInfo != null && lstDivInfo.Count() > 0)
             {
                 lstDivInfo.FirstOrDefault().QuerySelectorAll("a").Where(a => a.GetAttribute("href").Contains("/i/")).ToList()
                 .ForEach(a =>
                 {
                     var onlineURL = "http://www.dy2018.com" + a.GetAttribute("href");
-                    if(movieDataContent.Movies.FirstOrDefault(mo=>mo.OnlineUrl == onlineURL)==null)
+                    if (movieDataContent.Movies.FirstOrDefault(mo => mo.OnlineUrl == onlineURL) == null)
                     {
-                        var movieInfo = Dy2018MoviceInfoHelper.GetMovieInfoFromURL(onlineURL);
-                        if(movieInfo!=null)
+                        var movieInfo = GetMovieInfoFromURL(onlineURL);
+                        if (movieInfo != null)
                         {
                             movieInfo.MovieType = (int)MovieTypeEnum.Latest;
-                            movieDataContent.Movies.Add(movieInfo);
+                            movieDataContent.Add(movieInfo);
                             newMovieCount++;
                         }
-                        
+
                     }
                 });
                 movieDataContent.SaveChanges();
-              
+
             }
-            LogHelper.Info($"Finish Dy2018 CrawlerMovieInfoFromOnline,New Data Count:{newMovieCount}");
+            LogHelper.Info($"Finish Dy2018 CrawlLatestMovieInfo,New Data Count:{newMovieCount},IndexURL:{indexURL}");
         }
+
+        private static string GetHTMLOnJumpWebPage(string htmlDoc)
+        {
+            if (htmlDoc.Contains("window.location"))
+            {
+                var tempDom = htmlParser.Parse(htmlDoc);
+                var scriptDom = tempDom.QuerySelector("script");
+                var tempURL = "http://www.dy2018.com" + scriptDom.InnerHtml.Replace("window.location=", "")
+                    .Replace("+", "").Replace("\"", "").Replace(" ", "").Replace(";", "");
+                htmlDoc = HTTPHelper.GetHTMLByURL(tempURL);
+                LogHelper.Info($"GetHTML From JumpURL {(string.IsNullOrEmpty(htmlDoc) ? "Success" : "Fail")}!,the URL:{tempURL}");
+            }
+            //LogHelper.Info(htmlDoc);
+            return htmlDoc;
+        }
+
+
+        /// <summary>
+        /// 从在线网页提取电影数据
+        /// </summary>
+        /// <param name="onlineURL"></param>
+        /// <returns></returns>
+        private static MovieInfo GetMovieInfoFromURL(string onlineURL)
+        {
+            try
+            {
+                var movieHTML = HTTPHelper.GetHTMLByURL(onlineURL);
+                if (string.IsNullOrEmpty(movieHTML))
+                    return null;
+                movieHTML = GetHTMLOnJumpWebPage(movieHTML);
+
+                var movieDoc = htmlParser.Parse(movieHTML);
+                var zoom = movieDoc.GetElementById("Zoom");
+                var lstDownLoadURL = movieDoc.QuerySelectorAll("[bgcolor='#fdfddf']");
+                var updatetime = movieDoc.QuerySelector("span.updatetime"); var pubDate = DateTime.Now;
+                if (updatetime != null && !string.IsNullOrEmpty(updatetime.InnerHtml))
+                {
+                    DateTime.TryParse(updatetime.InnerHtml.Replace("发布时间：", ""), out pubDate);
+                }
+                var lstURL = lstDownLoadURL.Select(a => a.QuerySelector("a")).Where(item => item != null).Select(item => item.InnerHtml).ToList();
+
+                var movieName = movieDoc.QuerySelector("div.title_all");
+
+                var movieInfo = new MovieInfo()
+                {
+                    MovieName = movieName != null && movieName.QuerySelector("h1") != null ?
+                    movieName.QuerySelector("h1").InnerHtml : "找不到影片信息...",
+                    OnlineUrl = onlineURL,
+                    MovieIntro = zoom != null ? zoom.InnerHtml : "暂无介绍...",
+                    DownLoadURLList = string.Join(";", lstURL),
+                    PubDate = pubDate.Date,
+                    DataCreateTime = DateTime.Now,
+                    SoureceDomain = SoureceDomainConsts.Dy2018Domain,
+                    //MovieType=(int)MovieTypeEnum.Latest
+                };
+                return movieInfo;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error("Dy2018 GetMovieInfoFromURL Exception", ex, new { OnloneURL = onlineURL });
+                return null;
+            }
+
+        }
+
     }
 }
  
