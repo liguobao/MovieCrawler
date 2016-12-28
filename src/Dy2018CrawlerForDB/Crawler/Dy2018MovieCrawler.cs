@@ -20,35 +20,45 @@ namespace Dy2018CrawlerWithDB
         /// 爬取数据
         /// </summary>
         /// <param name="indexPageCount"></param>
-        public static void CrawlLatestMovieInfo(int indexPageCount = 0)
+        public static void CrawlMovieInfo()
         {
             Task.Factory.StartNew(() =>
             {
                 try
                 {
-                    LogHelper.Info("Dy2018 CrawlLatestMovieInfo Start...");
-                    indexPageCount = indexPageCount == 0 ? 3 : indexPageCount;
-                    //取前五页
-                    for (var i = 1; i < indexPageCount; i++)
-                    {
-                        try
-                        {
-                            var index = i == 1 ? "" : "_" + i;
-                            var indexURL = $"http://www.dy2018.com/html/gndy/dyzz/index{index}.html";
-                            CrawlerMovieInfoFromOnline(indexURL);
-                        }
-                        catch (Exception ex)
-                        {
-                            LogHelper.Error("CrawlLatestMovieInfo Exception", ex);
-                        }
+                    var  indexPageCount = movieDataContent.CrawlerConfigurations
+                    .FirstOrDefault(c=>c.ConfigconfigurationName== ConstsConf.Dy2018CrawlerPageCount).ConfigconfigurationKey;
+                    LogHelper.Info($"Dy2018 Crawl MovieInfo Start,PageCount:{indexPageCount}...");
 
+                    var lstConfig = movieDataContent.CrawlerConfigurations.Where(c=>c.IsEnabled 
+                    && c.ConfigconfigurationName== ConstsConf.Dy2018CrawlerList).ToList();
+
+                    foreach(var config in lstConfig)
+                    {
+                        //取前五页
+                        for (var i = 1; i < indexPageCount; i++)
+                        {
+                            try
+                            {
+                                var index = i == 1 ? "" : "_" + i;
+                                var indexURL = $"{config.ConfigconfigurationValue}index{index}.html";
+                                CrawlerMovieInfoFromOnline(indexURL, (MovieTypeEnum)config.ConfigconfigurationKey);
+                            }
+                            catch (Exception ex)
+                            {
+                                LogHelper.Error("Crawl MovieInfo Exception", ex);
+                            }
+
+                        }
                     }
 
-                    LogHelper.Info("Dy2018 CrawlLatestMovieInfo Finish!");
+                   
+
+                    LogHelper.Info("Dy2018 Crawl MovieInfo Finish!");
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.Error("Dy2018 CrawlLatestMovieInfo Exception", ex);
+                    LogHelper.Error("Dy2018 Crawl MovieInfo Exception", ex);
                 }
             });
         }
@@ -108,7 +118,7 @@ namespace Dy2018CrawlerWithDB
         /// 从在线网页提取数据
         /// </summary>
         /// <param name="i"></param>
-        private static void CrawlerMovieInfoFromOnline(string indexURL)
+        private static void CrawlerMovieInfoFromOnline(string indexURL, MovieTypeEnum movieType)
         {
             var newMovieCount = 0;
             var htmlDoc = HTTPHelper.GetHTMLByURL(indexURL);
@@ -127,17 +137,16 @@ namespace Dy2018CrawlerWithDB
                         var movieInfo = GetMovieInfoFromURL(onlineURL);
                         if (movieInfo != null)
                         {
-                            movieInfo.MovieType = (int)MovieTypeEnum.Latest;
+                            movieInfo.MovieType = (int)movieType;
                             movieDataContent.Add(movieInfo);
                             newMovieCount++;
                         }
-
                     }
                 });
                 movieDataContent.SaveChanges();
 
             }
-            LogHelper.Info($"Finish Dy2018 CrawlLatestMovieInfo,New Data Count:{newMovieCount},IndexURL:{indexURL}");
+            LogHelper.Info($"Finish Dy2018 Crawl {movieType.ToString()}MovieInfo,New Data Count:{newMovieCount},IndexURL:{indexURL}");
         }
 
         private static string GetHTMLOnJumpWebPage(string htmlDoc)

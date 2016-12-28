@@ -46,6 +46,22 @@ namespace Dy2018CrawlerWithDB.Models
         /// 最新
         /// </summary>
         Latest = 2,
+
+        /// <summary>
+        /// Dy2018恐怖类型
+        /// </summary>
+        Dy2018Horror = 8,
+
+        /// <summary>
+        ///  Dy2018科幻类型
+        /// </summary>
+        Dy2018ScienceFiction = 4,
+
+        /// <summary>
+        ///  Dy2018必看
+        /// </summary>
+        Dy2018Bikan = 100,
+
     }
 
   

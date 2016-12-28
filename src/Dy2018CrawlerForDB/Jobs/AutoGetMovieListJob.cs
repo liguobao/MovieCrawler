@@ -18,7 +18,7 @@ namespace Dy2018CrawlerWithDB.Jobs
         {
             LogHelper.Info("Start crawling");
             Btdytt520MovieCrawler.CrawlHostMovieInfo();
-            Dy2018MovieCrawler.CrawlLatestMovieInfo();
+            Dy2018MovieCrawler.CrawlMovieInfo();
             Dy2018MovieCrawler.CrawlHotMovie();
 
             LogHelper.Info("Finish crawling");

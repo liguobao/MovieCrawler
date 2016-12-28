@@ -20,6 +20,8 @@ namespace Dy2018CrawlerWithDB.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {
+            movieDataContent.SaveChanges();
+
             var lstDy2018HotMovie = new List<MovieInfo>();
             lstDy2018HotMovie = movieDataContent.Movies.Where(
                    mo => mo.MovieType == (int)MovieTypeEnum.Hot
@@ -32,13 +34,14 @@ namespace Dy2018CrawlerWithDB.Controllers
         /// 最新电影
         /// </summary>
         /// <returns></returns>
-        public IActionResult LatestMovieList(int count=100)
+        public IActionResult Dy2018MovieList(int count=100 , int movieType=2)
         {
             var lstDy2018HotMovie = new List<MovieInfo>();
             lstDy2018HotMovie = movieDataContent.Movies.Where(
-                   mo => mo.MovieType == (int)MovieTypeEnum.Latest
+                   mo => mo.MovieType == movieType
                    && mo.SoureceDomain == SoureceDomainConsts.Dy2018Domain
                    ).OrderByDescending(mo=>mo.PubDate).Take(count).ToList();
+            ViewBag.MovieType = ((MovieTypeEnum)movieType).ToString();
             return View(lstDy2018HotMovie);
         }
 
@@ -51,9 +54,6 @@ namespace Dy2018CrawlerWithDB.Controllers
                    ).OrderByDescending(mo => mo.PubDate).Take(count).ToList();
             return View(lstDy2018HotMovie);
         }
-
-
-
 
         /// <summary>
         /// 订阅
@@ -72,7 +72,7 @@ namespace Dy2018CrawlerWithDB.Controllers
         {
             LogHelper.Info("RefreshMovie Start crawling");
             Btdytt520MovieCrawler.CrawlHostMovieInfo();
-            Dy2018MovieCrawler.CrawlLatestMovieInfo(50);
+            Dy2018MovieCrawler.CrawlMovieInfo();
             Dy2018MovieCrawler.CrawlHotMovie();
 
             LogHelper.Info("RefreshMovie Finish crawling");
