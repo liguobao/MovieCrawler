@@ -31,7 +31,7 @@ namespace Dy2018Crawler
             }
             return new MovieInfo()
             {
-                MovieName = nameDom != null ? nameDom.InnerHtml : "获取名称失败...",
+                MovieName = nameDom?.InnerHtml ?? "获取名称失败...",
                 Dy2018OnlineUrl = onlineURL,
                 MovieIntro = introDom != null && isContainIntro ? introDom.InnerHtml : "",
                 PubDate = pubDate,

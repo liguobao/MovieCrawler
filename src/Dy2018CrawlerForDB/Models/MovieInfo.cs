@@ -36,16 +36,16 @@ namespace Dy2018CrawlerWithDB.Models
     }
 
 
-    public enum MovieTypeEnum
+    public class MovieType
     {
         /// <summary>
         /// 热门
         /// </summary>
-        Hot = 1,
+        public static int Hot { get; } = 1;
         /// <summary>
         /// 最新
         /// </summary>
-        Latest = 2,
+        public static int Latest { get; } = 2;
     }
 
   

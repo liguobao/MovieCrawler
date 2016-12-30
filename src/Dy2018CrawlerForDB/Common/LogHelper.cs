@@ -22,7 +22,5 @@ namespace Dy2018CrawlerWithDB
         {
             Logger.Error(message + ex.ToString() + "Info:"+info, ex,info);
         }
-
-
     }
 }

@@ -20,7 +20,6 @@ namespace Dy2018CrawlerWithDB.Jobs
             Btdytt520CrawlerHelper.CrawlHostMovieInfo();
             Dy2018CrawlerHelper.CrawlLatestMovieInfo();
             Dy2018CrawlerHelper.CrawlHotMovie();
-
             LogHelper.Info("Finish crawling");
         }
 

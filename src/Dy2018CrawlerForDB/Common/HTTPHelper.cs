@@ -21,24 +21,15 @@ namespace Dy2018CrawlerWithDB
             {
             }
 
-            public CrawlerProxyInfo(Uri proxyUri)
-            {
-                this.ProxyUri = proxyUri;
-            }
+            public CrawlerProxyInfo(Uri proxyUri) => ProxyUri = proxyUri;
 
             public Uri ProxyUri { get; set; }
 
             public ICredentials Credentials { get; set; }
 
-            public Uri GetProxy(Uri destination)
-            {
-                return this.ProxyUri;
-            }
+            public Uri GetProxy(Uri destination) =>ProxyUri;
 
-            public bool IsBypassed(Uri host)
-            {
-                return false; /* Proxy all requests */
-            }
+            public bool IsBypassed(Uri host) => false;/* Proxy all requests */
         }
 
         /// <summary>
@@ -65,15 +56,15 @@ namespace Dy2018CrawlerWithDB
                 if (url.Contains(SoureceDomainConsts.BTdytt520)&& isUseProxy)
                 {
                     var index = new Random(DateTime.Now.Millisecond).Next(0, 20);
-                    proxyInfo = availableProxy.btdytt520[index];
-                    crawlerProxyInfo = new CrawlerProxyInfo($"http://{proxyInfo.ip}:{proxyInfo.port}");
+                    proxyInfo = availableProxy.Btdytt520[index];
+                    crawlerProxyInfo = new CrawlerProxyInfo($"http://{proxyInfo.Ip}:{proxyInfo.Port}");
 
                 }
                 else if(url.Contains(SoureceDomainConsts.Dy2018Domain)&& isUseProxy)
                 {
                     var index = new Random(DateTime.Now.Millisecond).Next(0, 20);
-                    proxyInfo = availableProxy.dy2018[index];
-                    crawlerProxyInfo = new CrawlerProxyInfo($"http://{proxyInfo.ip}:{proxyInfo.port}");
+                    proxyInfo = availableProxy.Dy2018[index];
+                    crawlerProxyInfo = new CrawlerProxyInfo($"http://{proxyInfo.Ip}:{proxyInfo.Port}");
                 }
               
                 wRequest.Proxy = crawlerProxyInfo;
@@ -92,7 +83,7 @@ namespace Dy2018CrawlerWithDB
             }
             catch (Exception ex)
             {
-                string proxyIP = isUseProxy ? proxyInfo.ip : "No Use Proxy";
+                string proxyIP = isUseProxy ? proxyInfo.Ip : "No Use Proxy";
                 LogHelper.Error("GetHTMLByURL Exception", ex,$"URL:{url},Proxy:{proxyIP}");
                 return string.Empty;
             }

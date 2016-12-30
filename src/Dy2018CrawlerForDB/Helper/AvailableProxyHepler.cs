@@ -18,31 +18,38 @@ namespace Dy2018Crawler.Helper
         /// <summary>
         /// 
         /// </summary>
-        public string disable { get; set; }
+        [JsonProperty("disable")]
+        public string Disable { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int failedCount { get; set; }
+        [JsonProperty("failedCount")]
+        public int FailedCount { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string init { get; set; }
+        [JsonProperty("init")]
+        public string Init { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string ip { get; set; }
+        [JsonProperty("ip")]
+        public string Ip { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int port { get; set; }
+        [JsonProperty("port")]
+        public int Port { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int referCount { get; set; }
+        [JsonProperty("referCount")]
+        public int ReferCount { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public Score score { get; set; }
+        [JsonProperty("score")]
+        public Score Score { get; set; }
     }
 
     public class Score
@@ -50,15 +57,18 @@ namespace Dy2018Crawler.Helper
         /// <summary>
         /// 
         /// </summary>
-        public int avgScore { get; set; }
+        [JsonProperty("avgScore")]
+        public int AvgScore { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int failedCount { get; set; }
+        [JsonProperty("failedCount")]
+        public int FailedCount { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int referCount { get; set; }
+        [JsonProperty("referCount")]
+        public int ReferCount { get; set; }
     }
 
     public class AvailableProxy
@@ -66,11 +76,13 @@ namespace Dy2018Crawler.Helper
         /// <summary>
         /// 
         /// </summary>
-        public List<ProxyInfo> btdytt520 { get; set; }
+        [JsonProperty("btdytt520")]
+        public List<ProxyInfo> Btdytt520 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public List<ProxyInfo> dy2018 { get; set; }
+        [JsonProperty("dy2018")]
+        public List<ProxyInfo> Dy2018 { get; set; }
 
           }
 
@@ -83,29 +95,19 @@ namespace Dy2018Crawler.Helper
         {
             if (_availableProxy != null)
                 return _availableProxy;
-            string jsonFilePath = Path.Combine(ConstsConf.WWWRootPath, "availableProxy.json");
-            using (var stream = new FileStream(jsonFilePath, FileMode.OpenOrCreate))
+            try
             {
-                try
+                string jsonFilePath = Path.Combine(ConstsConf.WWWRootPath, "availableProxy.json");
+                string json = File.ReadAllText(jsonFilePath);
+                _availableProxy = JsonConvert.DeserializeObject<AvailableProxy>(json, new JsonSerializerSettings
                 {
-                    StreamReader sr = new StreamReader(stream);
-                    JsonSerializer serializer = new JsonSerializer
-                    {
-                        NullValueHandling = NullValueHandling.Ignore,
-                        Converters = { new JavaScriptDateTimeConverter() }
-                    };
-                    //构建Json.net的读取流  
-                    using (var reader = new JsonTextReader(sr))
-                    {
-                        _availableProxy = serializer.Deserialize<AvailableProxy>(reader);
-
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    LogHelper.Error("GetAvailableProxy Exception", ex);
-                }
+                    NullValueHandling = NullValueHandling.Ignore,
+                    Converters = { new JavaScriptDateTimeConverter() }
+                });
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error("GetAvailableProxy Exception", ex);
             }
             return _availableProxy;
         }
