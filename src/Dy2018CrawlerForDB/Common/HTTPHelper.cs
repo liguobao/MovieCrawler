@@ -107,15 +107,15 @@ namespace Dy2018CrawlerWithDB
                 if (wRequest.RequestUri.Host.Contains(SoureceDomainConsts.BTdytt520) && isUseProxy)
                 {
                     var index = new Random(DateTime.Now.Millisecond).Next(0, 20);
-                    proxyInfo = availableProxy.btdytt520[index];
-                    crawlerProxyInfo = new CrawlerProxyInfo($"http://{proxyInfo.ip}:{proxyInfo.port}");
+                    proxyInfo = availableProxy.Btdytt520[index];
+                    crawlerProxyInfo = new CrawlerProxyInfo($"http://{proxyInfo.Ip}:{proxyInfo.Port}");
 
                 }
                 else if (wRequest.RequestUri.Host.Contains(SoureceDomainConsts.Dy2018Domain) && isUseProxy)
                 {
                     var index = new Random(DateTime.Now.Millisecond).Next(0, 20);
-                    proxyInfo = availableProxy.dy2018[index];
-                    crawlerProxyInfo = new CrawlerProxyInfo($"http://{proxyInfo.ip}:{proxyInfo.port}");
+                    proxyInfo = availableProxy.Dy2018[index];
+                    crawlerProxyInfo = new CrawlerProxyInfo($"http://{proxyInfo.Ip}:{proxyInfo.Port}");
                 }
 
                 wRequest.Proxy = crawlerProxyInfo;
@@ -134,7 +134,7 @@ namespace Dy2018CrawlerWithDB
             }
             catch (Exception ex)
             {
-                string proxyIP = isUseProxy ? proxyInfo.ip : "No Use Proxy";
+                string proxyIP = isUseProxy ? proxyInfo.Ip : "No Use Proxy";
                 LogHelper.Error("GetHTMLByURL Exception", ex, $"URL:{wRequest.RequestUri.Host},Proxy:{proxyIP}");
                 return string.Empty;
             }

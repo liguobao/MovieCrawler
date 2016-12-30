@@ -15,5 +15,12 @@ namespace Dy2018CrawlerForDB.Helper
                 loop(per);
             }
         }
+        public static void ForEach<T>(this IQueryable<T> collection, Action<T> loop)
+        {
+            foreach (var per in collection)
+            {
+                loop(per);
+            }
+        }
     }
 }
