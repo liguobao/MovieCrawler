@@ -8,6 +8,11 @@ namespace Dy2018CrawlerWithDB
     public class ConstsConf
     {
         public static string WWWRootPath = "";
+
+        public static string Dy2018CrawlerList = "Dy2018CrawlerList";
+
+        public static string Dy2018CrawlerPageCount = "Dy2018CrawlerPageCount";
+
     }
 
     public class SoureceDomainConsts
