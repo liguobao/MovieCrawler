@@ -1,6 +1,9 @@
+[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](http://www.gnu.org/licenses/lgpl-3.0)
+
+
 ### dy2018电影天堂爬虫
 
-在线地址：[http://codelover.win/](http://codelover.win/)
+在线地址：[http://yibaobao.wang/](yibaobao.wang/)
 
 详细介绍在知乎专栏：[手把手教你用.NET Core写爬虫](https://zhuanlan.zhihu.com/p/24151412)
 
@@ -20,4 +23,7 @@ dotnet restore;
 dotnet publish -r ubuntu.14.04-x64 -c Release -o "C:\code\website\Dy2018Crawler";
 
 ```
+
+
+
 
