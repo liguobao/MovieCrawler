@@ -11,7 +11,7 @@ namespace Dy2018CrawlerWithDB.Controllers
     public class HomeController : Controller
     {
 
-        private DataContext movieDataContent { get; } = new DataContext();
+        private DataContext MovieDataContent { get; } = new DataContext();
 
         /// <summary>
         /// 首页
@@ -20,11 +20,9 @@ namespace Dy2018CrawlerWithDB.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {
-            movieDataContent.SaveChanges();
-
             var lstDy2018HotMovie = new List<MovieInfo>();
-            lstDy2018HotMovie = movieDataContent.Movies.Where(
-                   mo => mo.MovieType == (int)MovieTypeEnum.Hot
+            lstDy2018HotMovie = MovieDataContent.Movies.Where(
+                   mo => mo.MovieType == MovieType.Hot
                    && mo.SoureceDomain == SoureceDomainConsts.Dy2018Domain && mo.PubDate > DateTime.Now.Date.AddDays(-30)
                    ).ToList();
             return View(lstDy2018HotMovie);
@@ -34,26 +32,28 @@ namespace Dy2018CrawlerWithDB.Controllers
         /// 最新电影
         /// </summary>
         /// <returns></returns>
-        public IActionResult Dy2018MovieList(int count=100 , int movieType=2)
+        public IActionResult LatestMovieList(int count=100)
         {
             var lstDy2018HotMovie = new List<MovieInfo>();
-            lstDy2018HotMovie = movieDataContent.Movies.Where(
-                   mo => mo.MovieType == movieType
+            lstDy2018HotMovie = MovieDataContent.Movies.Where(
+                   mo => mo.MovieType == MovieType.Latest
                    && mo.SoureceDomain == SoureceDomainConsts.Dy2018Domain
                    ).OrderByDescending(mo=>mo.PubDate).Take(count).ToList();
-            ViewBag.MovieType = ((MovieTypeEnum)movieType).ToString();
             return View(lstDy2018HotMovie);
         }
 
         public IActionResult Btdytt520HotClick(int count = 100)
         {
             var lstDy2018HotMovie = new List<MovieInfo>();
-            lstDy2018HotMovie = movieDataContent.Movies.Where(
-                   mo => mo.MovieType == (int)MovieTypeEnum.Latest
+            lstDy2018HotMovie = MovieDataContent.Movies.Where(
+                   mo => mo.MovieType == MovieType.Latest
                    && mo.SoureceDomain == SoureceDomainConsts.BTdytt520
                    ).OrderByDescending(mo => mo.PubDate).Take(count).ToList();
             return View(lstDy2018HotMovie);
         }
+
+
+
 
         /// <summary>
         /// 订阅
@@ -70,18 +70,17 @@ namespace Dy2018CrawlerWithDB.Controllers
         /// <returns></returns>
         public IActionResult RefreshMovie()
         {
-            LogHelper.Info("RefreshMovie Start crawling");
+            LogHelper.Info("Start crawling");
             Btdytt520MovieCrawler.CrawlHostMovieInfo();
-            Dy2018MovieCrawler.CrawlMovieInfo();
             Dy2018MovieCrawler.CrawlHotMovie();
-
-            LogHelper.Info("RefreshMovie Finish crawling");
+            Dy2018MovieCrawler.CrawlMovieInfo();
+            LogHelper.Info("Finish crawling");
             return View();
         }
 
         public IActionResult ShowMoiveDetail(string onlineURL)
         {
-            var movieInfo = movieDataContent.Movies.FirstOrDefault(mo => mo.OnlineUrl == onlineURL);
+            var movieInfo = MovieDataContent.Movies.FirstOrDefault(mo => mo.OnlineUrl == onlineURL);
             return View(movieInfo);
         }
 
