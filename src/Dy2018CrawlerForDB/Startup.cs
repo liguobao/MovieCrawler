@@ -66,11 +66,13 @@ namespace Dy2018CrawlerWithDB
             });
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             ConstsConf.WWWRootPath = env.WebRootPath;
+
+            ConstsConf.MySQLConnectionString = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+           .AddJsonFile("appsettings.json").Build()["ConnectionStrings:MySQLConnectionString"];
+
             //新建相关表
-            new DataContext().Database.EnsureCreated();
-
-            //LogHelper.Info("App Startup Configure...");
-
+            //new DataContext().Database.EnsureCreated();
         }
     }
 }

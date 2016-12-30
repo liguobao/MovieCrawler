@@ -7,6 +7,8 @@ namespace Dy2018CrawlerWithDB
 {
     public class ConstsConf
     {
+        public static string MySQLConnectionString = "";
+
         public static string WWWRootPath = "";
 
         public static string Dy2018CrawlerList = "Dy2018CrawlerList";

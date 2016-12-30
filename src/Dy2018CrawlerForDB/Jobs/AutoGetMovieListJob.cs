@@ -13,7 +13,7 @@ namespace Dy2018CrawlerWithDB.Jobs
     public class AutoGetMovieListJob:Job
     {
        
-        [Invoke(Begin = "2016-12-22 9:30", Interval = 1000 * 3600*2, SkipWhileExecuting =true)]
+        [Invoke(Begin = "2016-12-22 9:30", Interval = 1000 * 3600*6, SkipWhileExecuting =true)]
         public void Run()
         {
             LogHelper.Info("Start crawling");

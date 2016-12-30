@@ -21,7 +21,10 @@ namespace Dy2018CrawlerWithDB
             {
             }
 
-            public CrawlerProxyInfo(Uri proxyUri) => ProxyUri = proxyUri;
+            public CrawlerProxyInfo(Uri proxyUri)
+            {
+                ProxyUri = proxyUri;
+            }
 
             public Uri ProxyUri { get; set; }
 

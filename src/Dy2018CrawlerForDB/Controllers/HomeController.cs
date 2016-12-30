@@ -28,19 +28,18 @@ namespace Dy2018CrawlerWithDB.Controllers
             return View(lstDy2018HotMovie);
         }
 
-        /// <summary>
-        /// 最新电影
-        /// </summary>
-        /// <returns></returns>
-        public IActionResult LatestMovieList(int count=100)
+
+        public IActionResult Dy2018MovieList(int count = 100, int movieType = 2)
         {
             var lstDy2018HotMovie = new List<MovieInfo>();
             lstDy2018HotMovie = MovieDataContent.Movies.Where(
-                   mo => mo.MovieType == MovieType.Latest
+                   mo => mo.MovieType == movieType
                    && mo.SoureceDomain == SoureceDomainConsts.Dy2018Domain
-                   ).OrderByDescending(mo=>mo.PubDate).Take(count).ToList();
+                   ).OrderByDescending(mo => mo.PubDate).Take(count).ToList();
             return View(lstDy2018HotMovie);
         }
+
+
 
         public IActionResult Btdytt520HotClick(int count = 100)
         {
