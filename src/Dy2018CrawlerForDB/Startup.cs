@@ -41,7 +41,7 @@ namespace Dy2018CrawlerWithDB
         {
             env.ConfigureNLog("nlog.config");
             
-            app.UseTimedJob();
+           // app.UseTimedJob();
 
             //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             //loggerFactory.AddDebug();

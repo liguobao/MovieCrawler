@@ -18,13 +18,13 @@ namespace Dy2018CrawlerWithDB.Controllers
         /// </summary>
         /// <param name="isRefresh"></param>
         /// <returns></returns>
-        public IActionResult Index()
+        public IActionResult Index(int count = 100)
         {
             var lstDy2018HotMovie = new List<MovieInfo>();
             lstDy2018HotMovie = MovieDataContent.Movies.Where(
                    mo => mo.MovieType == MovieType.Hot
-                   && mo.SoureceDomain == SoureceDomainConsts.Dy2018Domain && mo.PubDate > DateTime.Now.Date.AddDays(-30)
-                   ).ToList();
+                   && mo.SoureceDomain == SoureceDomainConsts.Dy2018Domain && mo.PubDate > DateTime.Now.Date.AddYears(-1)
+                   ).Take(count).ToList();
             return View(lstDy2018HotMovie);
         }
 
