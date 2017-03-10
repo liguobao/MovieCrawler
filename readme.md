@@ -3,9 +3,15 @@
 
 ### dy2018电影天堂爬虫
 
+
+#### 2017-03-10
+迁移项目到VS2017+.NET Core1.1.1,之前的代码在forVS2015分支，暂时不打算继续更新了。
+
+
 在线地址：[http://yibaobao.wang/](yibaobao.wang/)
 
 详细介绍在知乎专栏：[手把手教你用.NET Core写爬虫](https://zhuanlan.zhihu.com/p/24151412)
+
 
 
 现有两个版本：
