@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Text;
+using System.IO;
+using NLog.Web;
 
 namespace Dy2018CrawlerForDB
 {
@@ -34,8 +37,7 @@ namespace Dy2018CrawlerForDB
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            env.ConfigureNLog(Path.Combine(env.WebRootPath, "nlog.config"));
 
             if (env.IsDevelopment())
             {
@@ -55,6 +57,15 @@ namespace Dy2018CrawlerForDB
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            ConstsConf.WWWRootPath = env.WebRootPath;
+
+            ConstsConf.MySQLConnectionString = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+           .AddJsonFile("appsettings.json").Build()["ConnectionStrings:MySQLConnectionString"];
+
         }
     }
 }

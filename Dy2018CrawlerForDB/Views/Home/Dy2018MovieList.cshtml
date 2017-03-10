@@ -1,6 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Hot Movie";
-}
+    ViewData["Title"] = "Movie List";
+} 
+
+
 @model List<Dy2018CrawlerWithDB.Models.MovieInfo>
 
 <div class="row">
@@ -11,20 +13,22 @@
             {
                 <li><a href="@(Url.Action("ShowMoiveDetail")+"?onlineURL="+@movie.OnlineUrl)" target="_blank">@movie.MovieName</a></li>
             }
-           
+
         </ul>
     </div>
     <div class="col-md-7">
         <h2>DownLoadURL</h2>
         <ul>
-           @foreach (var movie in Model)
-           {
-                <li><a href="@movie.DownLoadURLList.Split(';').FirstOrDefault(item => item.Contains("ftp"))" 
-                       target="_blank">@{ 
+            @foreach (var movie in Model)
+            {
+                <li>
+                    <a href="@movie.DownLoadURLList.Split(';').FirstOrDefault(item => item.Contains("ftp"))"
+                       target="_blank">
+                        @{
                            var downloadURL = movie.DownLoadURLList.Split(';').FirstOrDefault(item => item.Contains("ftp"));
                            if (String.IsNullOrEmpty(downloadURL))
                            {
-                              <span>@movie.DownLoadURLList.FirstOrDefault()</span>
+                            <span>@movie.DownLoadURLList.FirstOrDefault()</span>
 
                            }
                            else
@@ -32,8 +36,10 @@
                             <span>@downloadURL</span>
                            }
                     }
-                    </a></li>
-           }
+                </a>
+            </li>
+                           }
         </ul>
     </div>
 </div>
+
