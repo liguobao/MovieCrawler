@@ -35,14 +35,14 @@ namespace Dy2018CrawlerForJson
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            env.ConfigureNLog(Path.Combine(env.WebRootPath, "nlog.config"));
+            loggerFactory.ConfigureNLog(Path.Combine(env.WebRootPath, "nlog.config"));
 
             app.UseTimedJob();
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
+
             }
             else
             {
