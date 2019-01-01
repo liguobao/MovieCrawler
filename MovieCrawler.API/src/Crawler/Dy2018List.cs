@@ -33,6 +33,7 @@ namespace MovieCrawler.API.Crawler
                {
                    Name = a.TextContent,
                    Link = onlineURL,
+                   UpdateTime = DateTime.Now
                };
                FillMovieDetail(onlineURL, movie);
                return movie;

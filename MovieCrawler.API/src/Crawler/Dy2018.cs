@@ -63,6 +63,7 @@ namespace MovieCrawler.API.Crawler
                 {
                     Name = a.TextContent,
                     Link = onlineURL,
+                    UpdateTime = DateTime.Now
                 };
 
                 FillMovieDetail(onlineURL, movie);
@@ -77,7 +78,7 @@ namespace MovieCrawler.API.Crawler
             if (!string.IsNullOrEmpty(movieHTML))
             {
                 var htmlDoc = htmlParser.Parse(movieHTML);
-                movie.UpdateTime = htmlDoc?.QuerySelector("span.updatetime")?.TextContent?.Replace("发布时间：", "");
+                movie.PublishTime = htmlDoc?.QuerySelector("span.updatetime")?.TextContent?.Replace("发布时间：", "");
                 movie.Cover = htmlDoc?.QuerySelector("div.co_content8")?.QuerySelector("img")?.GetAttribute("src");
                 movie.Intro = htmlDoc?.QuerySelector("#Zoom")?.InnerHtml;
                 if (htmlDoc.QuerySelectorAll("table").Any())

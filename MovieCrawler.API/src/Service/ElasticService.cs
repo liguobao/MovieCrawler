@@ -47,7 +47,7 @@ namespace MovieCrawler.API.Service
             .Explain()
             .From(page * size)
             .Size(size)
-            .Sort(sort => sort.Descending(h => h.UpdateTime))
+            .Sort(sort => sort.Descending(h => h.PublishTime))
             .Query(q => ConvertToQuery(keyword, q))
             );
             if (searchRsp.IsValid)
