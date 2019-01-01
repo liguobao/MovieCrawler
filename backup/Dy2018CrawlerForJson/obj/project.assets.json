@@ -13469,11 +13469,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/liguobao/code/github/MovieCrawler/Dy2018CrawlerForJson/Dy2018CrawlerForJson.csproj",
+      "projectUniqueName": "/Users/liguobao/code/github/MovieCrawler/backup/Dy2018CrawlerForJson/Dy2018CrawlerForJson.csproj",
       "projectName": "Dy2018CrawlerForJson",
-      "projectPath": "/Users/liguobao/code/github/MovieCrawler/Dy2018CrawlerForJson/Dy2018CrawlerForJson.csproj",
+      "projectPath": "/Users/liguobao/code/github/MovieCrawler/backup/Dy2018CrawlerForJson/Dy2018CrawlerForJson.csproj",
       "packagesPath": "/Users/liguobao/.nuget/packages/",
-      "outputPath": "/Users/liguobao/code/github/MovieCrawler/Dy2018CrawlerForJson/obj/",
+      "outputPath": "/Users/liguobao/code/github/MovieCrawler/backup/Dy2018CrawlerForJson/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"

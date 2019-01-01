@@ -2,3 +2,5 @@ src/bin
 src/obj
 test/bin
 test/obj
+.vs/
+src/appsettings.Development.json

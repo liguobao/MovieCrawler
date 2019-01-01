@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MovieCrawler.API.Crawler;
+using MovieCrawler.API.Model;
+using MovieCrawler.API.Service;
 
 namespace MovieCrawler.API
 {
@@ -26,6 +29,12 @@ namespace MovieCrawler.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddOptions().Configure<AppSettings>(Configuration);
+            services.AddSingleton<ElasticService, ElasticService>();
+            services.AddScoped<BaseCrawler, Dy2018>();
+            services.AddScoped<ElasticService, ElasticService>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +49,7 @@ namespace MovieCrawler.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             app.UseMvc();
         }
     }
