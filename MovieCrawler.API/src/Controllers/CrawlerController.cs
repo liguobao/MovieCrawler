@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using MovieCrawler.API.Common;
 using MovieCrawler.API.Crawler;
 
 namespace MovieCrawler.API.Controllers
@@ -26,9 +27,14 @@ namespace MovieCrawler.API.Controllers
             var crawler = _serviceProvider.GetServices<BaseCrawler>().FirstOrDefault(c => c.GetType().Name.ToLower() == name);
             if (crawler != null)
             {
-                crawler.Run();
+                LogHelper.RunActionTaskNotThrowEx(() =>
+                {
+                    crawler.Run();
+                }, name);
+                return new JsonResult(new { msg = $"{name} running." });
             }
-            return new JsonResult(new { });
+            return new JsonResult(new { msg = $"{name} not found." });
+
         }
     }
 }

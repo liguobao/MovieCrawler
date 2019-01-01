@@ -37,7 +37,7 @@ namespace MovieCrawler.API.Crawler
         public void Run()
         {
             var name = this.GetType().Name.ToLower();
-            foreach (var config in _appsetgins.CrawlerConfigs.Where(c => c.Name == name))
+            foreach (var config in _appsetgins.CrawlerConfigs.Where(c => c.Name == name.ToLower()))
             {
                 foreach (var host in config.Hosts)
                 {

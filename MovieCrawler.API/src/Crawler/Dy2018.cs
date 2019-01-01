@@ -19,7 +19,7 @@ namespace MovieCrawler.API.Crawler
         {
 
         }
-        private static HtmlParser htmlParser = new HtmlParser();
+        protected static HtmlParser htmlParser = new HtmlParser();
 
         public override string LoadHTML(string url)
         {
@@ -57,8 +57,6 @@ namespace MovieCrawler.API.Crawler
             var movies = aList?.Select(a =>
             {
                 var onlineURL = "https://www.dy2018.com" + a.GetAttribute("href");
-
-
                 var movie = new MovieDetail()
                 {
                     Name = a.TextContent,
@@ -71,7 +69,7 @@ namespace MovieCrawler.API.Crawler
             return movies;
         }
 
-        private void FillMovieDetail(string onlineURL, MovieDetail movie)
+        protected void FillMovieDetail(string onlineURL, MovieDetail movie)
         {
             var movieHTML = LoadHTML(onlineURL);
             if (!string.IsNullOrEmpty(movieHTML))
@@ -79,7 +77,7 @@ namespace MovieCrawler.API.Crawler
                 var htmlDoc = htmlParser.Parse(movieHTML);
                 movie.UpdateTime = htmlDoc?.QuerySelector("span.updatetime")?.TextContent?.Replace("发布时间：", "");
                 movie.Cover = htmlDoc?.QuerySelector("div.co_content8")?.QuerySelector("img")?.GetAttribute("src");
-                movie.Intro = htmlDoc?.QuerySelector("#Zoom")?.TextContent;
+                movie.Intro = htmlDoc?.QuerySelector("#Zoom")?.InnerHtml;
                 if (htmlDoc.QuerySelectorAll("table").Any())
                 {
                     List<string> resources = FindResources(htmlDoc);

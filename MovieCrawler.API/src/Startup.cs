@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using MovieCrawler.API.Crawler;
 using MovieCrawler.API.Model;
 using MovieCrawler.API.Service;
+using NLog.Web;
 
 namespace MovieCrawler.API
 {
@@ -32,6 +33,9 @@ namespace MovieCrawler.API
             services.AddOptions().Configure<AppSettings>(Configuration);
             services.AddSingleton<ElasticService, ElasticService>();
             services.AddScoped<BaseCrawler, Dy2018>();
+            services.AddScoped<BaseCrawler, Dy2018List>();
+
+
             services.AddScoped<ElasticService, ElasticService>();
 
 
@@ -50,6 +54,7 @@ namespace MovieCrawler.API
                 app.UseHsts();
             }
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            env.ConfigureNLog("nlog.config");
             app.UseMvc();
         }
     }
