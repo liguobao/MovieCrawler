@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using AngleSharp.Parser.Html;
 using Microsoft.Extensions.Options;
+using MovieCrawler.API.Common;
 using MovieCrawler.API.Model;
 using MovieCrawler.API.Service;
 using RestSharp;
@@ -44,6 +45,7 @@ namespace MovieCrawler.API.Crawler
             catch (Exception ex)
             {
                 Console.WriteLine($"url:{url},ex:{ex.ToString()}");
+                LogHelper.Error(url, ex);
                 return string.Empty;
             }
 
