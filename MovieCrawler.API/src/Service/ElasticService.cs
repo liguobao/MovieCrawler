@@ -64,6 +64,10 @@ namespace MovieCrawler.API.Service
 
         private static QueryContainer ConvertToQuery(string keyword, QueryContainerDescriptor<MovieDetail> q)
         {
+            if(string.IsNullOrEmpty(keyword))
+            {
+                return q;
+            }
             List<string> keywords = GetKeywords(keyword);
             var qcList = keywords.Select(k => ConvertToQueryContainer(k)).ToArray();
             var query = q.Bool(b => b.Should(qcList).MinimumShouldMatch(1));

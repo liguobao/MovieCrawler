@@ -44,7 +44,7 @@ namespace MovieCrawler.API.Crawler
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"url:{url},ex:{ex.ToString()}");
+                Console.WriteLine($"LoadHTML fail,url:{url},ex:{ex.ToString()}");
                 LogHelper.Error(url, ex);
                 return string.Empty;
             }

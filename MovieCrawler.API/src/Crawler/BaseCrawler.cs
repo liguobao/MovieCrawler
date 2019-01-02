@@ -41,6 +41,7 @@ namespace MovieCrawler.API.Crawler
             {
                 foreach (var host in config.Hosts)
                 {
+                    Console.WriteLine($"crawl {host} start.");
                     var html = this.LoadHTML(host);
                     if (string.IsNullOrEmpty(html))
                     {
@@ -48,6 +49,7 @@ namespace MovieCrawler.API.Crawler
                     }
                     var movies = this.ParseMovies(html);
                     _elasticService.Save(movies);
+                    Console.WriteLine($"crawl {host} end.");
 
                 }
             }
