@@ -10,6 +10,7 @@ using System.Linq;
 using System.Reflection;
 using RestSharp;
 using MovieCrawler.API.Model;
+using MovieCrawler.API.Common;
 
 namespace MovieCrawler.API.Service
 {
@@ -64,7 +65,7 @@ namespace MovieCrawler.API.Service
 
         private static QueryContainer ConvertToQuery(string keyword, QueryContainerDescriptor<MovieDetail> q)
         {
-            if(string.IsNullOrEmpty(keyword))
+            if (string.IsNullOrEmpty(keyword))
             {
                 return q;
             }
@@ -116,7 +117,7 @@ namespace MovieCrawler.API.Service
             IBulkResponse bulkRs = _elasticClient.IndexMany(movies, movieIndex);
             if (bulkRs.Errors)//如果异常
             {
-                // LogHelper.Info("SaveHouses error,index:" + houseIndex + ",DebugInformation:" + bulkRs.DebugInformation);
+                LogHelper.Info("SaveHouses error,index:" + movieIndex + ",DebugInformation:" + bulkRs.DebugInformation);
             }
         }
 

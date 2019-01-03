@@ -34,11 +34,14 @@ namespace MovieCrawler.API
             services.AddSingleton<ElasticService, ElasticService>();
             services.AddScoped<BaseCrawler, Dy2018>();
             services.AddScoped<BaseCrawler, Dy2018List>();
+            services.AddScoped<BaseCrawler, Btbtdy>();
+
+
 
 
             services.AddScoped<ElasticService, ElasticService>();
 
-             //添加cors 服务
+            //添加cors 服务
             services.AddCors(o => o.AddPolicy("APICors", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
 

@@ -27,12 +27,20 @@ namespace MovieCrawler.API.Model
         public string Link { get; set; }
 
 
-        public string PublishTime { get; set; }
+        public DateTime PublishTime { get; set; }
 
 
         public DateTime UpdateTime { get; set; }
 
-        public List<string> Resources { get; set; }
+        public List<Resource> DownResources { get; set; }
     }
+
+    public class Resource
+    {
+        public string Description { get; set; }
+
+        public string Link { get; set; }
+    }
+
 
 }

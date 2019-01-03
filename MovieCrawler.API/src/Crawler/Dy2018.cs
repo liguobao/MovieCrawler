@@ -78,30 +78,39 @@ namespace MovieCrawler.API.Crawler
             if (!string.IsNullOrEmpty(movieHTML))
             {
                 var htmlDoc = htmlParser.Parse(movieHTML);
-                movie.PublishTime = htmlDoc?.QuerySelector("span.updatetime")?.TextContent?.Replace("发布时间：", "");
+                if (DateTime.TryParse(htmlDoc?.QuerySelector("span.updatetime")?.TextContent?.Replace("发布时间：", ""), out var publishTime))
+                {
+                    movie.PublishTime = publishTime;
+                }
                 movie.Cover = htmlDoc?.QuerySelector("div.co_content8")?.QuerySelector("img")?.GetAttribute("src");
                 movie.Intro = htmlDoc?.QuerySelector("#Zoom")?.InnerHtml;
                 if (htmlDoc.QuerySelectorAll("table").Any())
                 {
-                    List<string> resources = FindResources(htmlDoc);
-                    movie.Resources = resources;
+                    movie.DownResources = FindResources(htmlDoc);
                 }
             }
         }
 
-        private static List<string> FindResources(AngleSharp.Dom.Html.IHtmlDocument htmlDoc)
+        private static List<Resource> FindResources(AngleSharp.Dom.Html.IHtmlDocument htmlDoc)
         {
-            var resources = new List<string>();
+            var resources = new List<Resource>();
             foreach (var tb in htmlDoc.QuerySelectorAll("table"))
             {
                 if (tb.QuerySelector("anchor") != null)
                 {
-                    resources.Add(tb.QuerySelector("anchor").GetAttribute("pkqdhpef"));
-                    resources.Add(tb.QuerySelector("anchor").TextContent);
+                    resources.Add(new Resource()
+                    {
+                        Description = tb.QuerySelector("anchor").TextContent,
+                        Link = tb.QuerySelector("anchor").GetAttribute("pkqdhpef")
+                    });
                 }
                 else if (tb.QuerySelector("a") != null && !tb.QuerySelector("a").GetAttribute("href").Contains("html"))
                 {
-                    resources.Add(tb.QuerySelector("a").TextContent);
+                    resources.Add(new Resource()
+                    {
+                        Description = tb.QuerySelector("a").GetAttribute("title"),
+                        Link = tb.QuerySelector("a").TextContent
+                    });
                 }
             }
 
