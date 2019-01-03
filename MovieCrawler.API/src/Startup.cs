@@ -38,6 +38,9 @@ namespace MovieCrawler.API
 
             services.AddScoped<ElasticService, ElasticService>();
 
+             //添加cors 服务
+            services.AddCors(o => o.AddPolicy("APICors", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+
 
         }
 

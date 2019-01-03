@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using MovieCrawler.API.Crawler;
@@ -23,6 +24,7 @@ namespace MovieCrawler.API.Controllers
 
 
         [HttpGet("")]
+        [EnableCors("APICors")]
         public ActionResult GetAll()
         {
             var page = !string.IsNullOrEmpty(HttpContext.Request.Query["page"]) ? int.Parse(HttpContext.Request.Query["page"]) : 0;
@@ -31,16 +33,12 @@ namespace MovieCrawler.API.Controllers
         }
 
         [HttpGet("{name}")]
-        public ActionResult Get(string name)
-        {
-            return new JsonResult(new { code = 0, data = _elasticSearch.Query(name) });
-        }
+        [EnableCors("APICors")]
+        public ActionResult Get(string name) => new JsonResult(new { code = 0, data = _elasticSearch.Query(name) });
 
 
         [HttpGet("search")]
-        public ActionResult Search([FromQuery]string keyword)
-        {
-            return new JsonResult(new { code = 0, data = _elasticSearch.Query(keyword) });
-        }
+        [EnableCors("APICors")]
+        public ActionResult Search([FromQuery]string keyword) => new JsonResult(new { code = 0, data = _elasticSearch.Query(keyword) });
     }
 }
