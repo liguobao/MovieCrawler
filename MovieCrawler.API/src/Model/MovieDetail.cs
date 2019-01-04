@@ -26,6 +26,8 @@ namespace MovieCrawler.API.Model
 
         public string Link { get; set; }
 
+        public string Type { get; set; }
+
 
         public DateTime PublishTime { get; set; }
 

@@ -106,10 +106,11 @@ namespace MovieCrawler.API.Crawler
                 }
                 else if (tb.QuerySelector("a") != null && !tb.QuerySelector("a").GetAttribute("href").Contains("html"))
                 {
+                    var a = tb.QuerySelector("a");
                     resources.Add(new Resource()
                     {
-                        Description = tb.QuerySelector("a").GetAttribute("title"),
-                        Link = tb.QuerySelector("a").TextContent
+                        Description = !string.IsNullOrEmpty(a.GetAttribute("title")) ? a.GetAttribute("title") : a.TextContent,
+                        Link = a.TextContent
                     });
                 }
             }
