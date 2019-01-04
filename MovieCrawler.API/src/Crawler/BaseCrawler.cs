@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MovieCrawler.API.Common;
 using MovieCrawler.API.Model;
 using MovieCrawler.API.Service;
 
@@ -41,16 +42,18 @@ namespace MovieCrawler.API.Crawler
             {
                 foreach (var host in config.Hosts)
                 {
-                    Console.WriteLine($"crawl {host} start.");
-                    var html = this.LoadHTML(host);
-                    if (string.IsNullOrEmpty(html))
+                    LogHelper.RunActionTaskNotThrowEx(() =>
                     {
-                        continue;
-                    }
-                    var movies = this.ParseMovies(html);
-                    _elasticService.Save(movies);
-                    Console.WriteLine($"crawl {host} end.");
-
+                        Console.WriteLine($"crawl {host} start.");
+                        var html = this.LoadHTML(host);
+                        if (string.IsNullOrEmpty(html))
+                        {
+                            return;
+                        }
+                        var movies = this.ParseMovies(html);
+                        _elasticService.Save(movies);
+                        Console.WriteLine($"crawl {host} end.");
+                    }, "Run", host);
                 }
             }
             Console.WriteLine(name);

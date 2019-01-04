@@ -52,6 +52,7 @@ namespace MovieCrawler.API.Crawler
         public override List<MovieDetail> ParseMovies(string html)
         {
             var dom = htmlParser.Parse(html);
+            var movies = new List<MovieDetail>();
             var lis = dom.QuerySelectorAll("div.xing_vb")?.SelectMany(div => div.QuerySelectorAll("li"));
             foreach (var li in lis)
             {
@@ -69,9 +70,9 @@ namespace MovieCrawler.API.Crawler
                     UpdateTime = DateTime.Now
                 };
                 FillMovieDetail(onlineURL, movie);
+                movies.Add(movie);
             }
-
-            return null;
+            return movies;
         }
 
         protected void FillMovieDetail(string onlineURL, MovieDetail movie)
