@@ -56,17 +56,18 @@ namespace MovieCrawler.API.Crawler
             var lis = dom.QuerySelectorAll("div.xing_vb")?.SelectMany(div => div.QuerySelectorAll("li"));
             foreach (var li in lis)
             {
-                if (li.QuerySelector("a") == null)
+                if (li.QuerySelector("a") == null || string.IsNullOrEmpty(li.QuerySelector(".xing_vb5")?.TextContent))
                 {
                     continue;
                 }
                 var onlineURL = "http://www.okzy.co" + li.QuerySelector("a").GetAttribute("href");
+                DateTime.TryParse(li.QuerySelector(".xing_vb6")?.TextContent, out var publishTime);
                 var movie = new MovieDetail()
                 {
                     Name = li.QuerySelector("a").TextContent,
                     Link = onlineURL,
                     Type = li.QuerySelector(".xing_vb5")?.TextContent,
-                    PublishTime = DateTime.Parse(li.QuerySelector(".xing_vb6")?.TextContent),
+                    PublishTime = publishTime,
                     UpdateTime = DateTime.Now
                 };
                 FillMovieDetail(onlineURL, movie);
