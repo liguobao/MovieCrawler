@@ -1,14 +1,6 @@
 {
-  "ProjectFilePath": "/Users/liguobao/code/github/MovieCrawler/backup/Dy2018CrawlerForJson/Dy2018CrawlerForJson.csproj",
+  "ProjectFilePath": "c:\\Users\\Administrator\\Desktop\\MovieCrawler\\backup\\Dy2018CrawlerForJson\\Dy2018CrawlerForJson.csproj",
   "TargetFramework": "netcoreapp2.2",
   "TagHelpers": [],
-  "Configuration": {
-    "ConfigurationName": "MVC-2.1",
-    "LanguageVersion": "2.1",
-    "Extensions": [
-      {
-        "ExtensionName": "MVC-2.1"
-      }
-    ]
-  }
+  "Configuration": null
 }

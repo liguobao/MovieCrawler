@@ -36,7 +36,10 @@ namespace MovieCrawler.API
             services.AddScoped<BaseCrawler, Dy2018List>();
             services.AddScoped<BaseCrawler, Btbtdy>();
             services.AddScoped<BaseCrawler, Okzyco>();
-
+            services.AddScoped<BaseCrawler,Chenluo>();
+            services.AddScoped<BaseCrawler,Btrenren>();
+            services.AddScoped<BaseCrawler,Bthad>();
+            services.AddScoped<BaseCrawler,Zyvip>();
 
 
 
