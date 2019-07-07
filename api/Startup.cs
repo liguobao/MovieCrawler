@@ -30,7 +30,7 @@ namespace MovieCrawler.API
             InitDB(services);
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Zhihu-404 API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Movie-Crawler API", Version = "v1" });
                 c.EnableAnnotations();
             });
         }
