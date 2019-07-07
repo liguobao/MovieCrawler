@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-crawler",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/crawler/MovieCrawler.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-api",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/api/MovieCrawler.API.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

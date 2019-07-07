@@ -1,0 +1,30 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "run-crawler",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-crawler",
+            "program": "${workspaceFolder}/crawler/bin/Debug/netcoreapp2.2/MovieCrawler.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/crawler",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "run-api",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-api",
+            "program": "${workspaceFolder}/api/bin/Debug/netcoreapp2.2/MovieCrawler.API.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/api",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        }
+    ]
+}
