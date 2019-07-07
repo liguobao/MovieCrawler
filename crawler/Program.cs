@@ -22,7 +22,7 @@ namespace MovieCrawler
             var serviceProvider = services.BuildServiceProvider();
             var crawlName = Environment.GetEnvironmentVariable("CRAWL_NAME");
             var crawler = serviceProvider.GetServices<BaseCrawler>()
-            .FirstOrDefault(c => c.GetType().Name.ToLower() == crawlName?.ToUpper());
+            .FirstOrDefault(c => c.GetType().Name.ToUpper() == crawlName?.ToUpper());
             if (crawler == null)
             {
                 Console.WriteLine($"crawler:{crawlName} not found!");

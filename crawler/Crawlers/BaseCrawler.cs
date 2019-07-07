@@ -31,6 +31,7 @@ namespace MovieCrawler.Crawlers
         public void Run()
         {
             var name = this.GetType().Name.ToLower();
+            Console.WriteLine($"{name}爬虫开始");
             foreach (var config in _appsetgins.CrawlerConfigs.Where(c => c.Name == name.ToLower()))
             {
                 foreach (var host in config.Hosts)
@@ -43,10 +44,10 @@ namespace MovieCrawler.Crawlers
                     }
                     var movies = this.ParseMovies(html);
                     _movieDapper.BulkInsert(movies);
-                    Console.WriteLine($"crawl {host} end.");
+                    Console.WriteLine($"crawl {host} end,movies count:{movies.Count}");
                 }
             }
-            Console.WriteLine(name);
+            
         }
 
     }
