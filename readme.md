@@ -53,9 +53,9 @@ server=127.0.0.1;port=3306;database=movie_map;uid=root;pwd=123;Allow User Variab
 ## docker支持
 
 ```sh
-docker run -v ~/docker-data/movie-crawler/appsettings.json:/app/appsettings.json -e CRAWL_NAME=dy2018 --name movie-crawler  -d movie-crawler-dy2018
+docker run -v ~/docker-data/movie-crawler/appsettings.json:/app/appsettings.json -e CRAWL_NAME=dy2018 --name movie-crawler  -d registry.cn-shanghai.aliyuncs.com/liguobao/movie-crawler:crawl
 
-docker run -p 10900:80 -v ~/docker-data/movie-crawler/appsettings.json:/app/appsettings.json --restart=always --name movie-crawler-api  -d movie-crawler-api
+docker run -p 10900:80 -v ~/docker-data/movie-crawler/appsettings.json:/app/appsettings.json --restart=always --name movie-crawler-api  -d registry.cn-shanghai.aliyuncs.com/liguobao/movie-crawler:api
 ```
 
 
