@@ -15,7 +15,7 @@
             "console": "internalConsole",
             "stopAtEntry": false,
             "env": {
-                "CRAWL_NAME":"Okzyco"
+                "CRAWL_NAME":"dy2018"
             }
         },
         {

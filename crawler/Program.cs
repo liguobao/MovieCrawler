@@ -5,6 +5,7 @@ using System.IO;
 using Microsoft.Extensions.Configuration;
 using MovieCrawler.Crawlers;
 using MovieCrawler.Dao;
+using System.Text;
 
 namespace MovieCrawler
 {
@@ -14,6 +15,7 @@ namespace MovieCrawler
 
         static void Main(string[] args)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var services = new ServiceCollection();
             InitConfiguration(environmentName, services);
