@@ -49,3 +49,13 @@
 ```log
 server=127.0.0.1;port=3306;database=movie_map;uid=root;pwd=123;Allow User Variables=True;Connection Timeout=30;SslMode=None;Charset=utf8mb4;MaxPoolSize=1000;
 ```
+
+## docker支持
+
+```sh
+docker run -v ~/docker-data/movie-crawler/appsettings.json:/app/appsettings.json -e CRAWL_NAME=dy2018 --name movie-crawler  -d movie-crawler-dy2018
+
+docker run -p 10900:80 -v ~/docker-data/movie-crawler/appsettings.json:/app/appsettings.json --restart=always --name movie-crawler-api  -d movie-crawler-api
+```
+
+
