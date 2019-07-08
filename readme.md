@@ -52,6 +52,12 @@ server=127.0.0.1;port=3306;database=movie_map;uid=root;pwd=123;Allow User Variab
 
 ## docker支持
 
+- registry.cn-shanghai.aliyuncs.com/liguobao/movie-crawler:crawl 为最新版的爬虫
+
+- registry.cn-shanghai.aliyuncs.com/liguobao/movie-crawler:api 为最新版的API
+
+- ui暂时还没好
+
 ```sh
 docker run -v ~/docker-data/movie-crawler/appsettings.json:/app/appsettings.json \
 -e CRAWL_NAME=dy2018 \
