@@ -3,7 +3,7 @@
 ## 已支持的网站
 
 - www.btbtdy.tv
-- 
+- 其他的慢慢补
 
 ## 架构部分
 
@@ -19,7 +19,23 @@
 - AppSettings.cs :各种配置项
 - Program.cs 程序启动文件
 
-每次运行一个爬虫任务, 通过CRAWL_NAME环境变量控制, 爬取结果直接写入MySQL.
+1. 每次运行一个爬虫任务, 通过CRAWL_NAME环境变量控制, 爬取结果直接写入MySQL.
+2. 需要爬取的网站相关页面在appsettings.json里面配置, 运行的时候会读取的
+
+### 支持一个新网站需要做的事情
+- 集成BaseCrawler, 重写LoadHTML和ParseMovies两个方法
+- 将实现的XXCrawler声明成BaseCrawler的实现类
+- 在appsettings里面心如XXCrawler的同名配置, 配置大概长下面这样, name为类名小写, hosts为需要爬取的页面.
+
+```json
+    {
+      "name": "dy2018",
+      "hosts": [
+        "https://www.dy2018.com/"
+      ]
+    }
+```
+
 
 ## api
 
