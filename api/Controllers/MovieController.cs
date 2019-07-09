@@ -52,7 +52,7 @@ namespace MovieCrawler.API.Controllers
 
         [HttpGet("api/v1/movies/{id}")]
         [SwaggerResponse(200, "", typeof(DBMovie))]
-        public ActionResult GetOneMovie([FromQuery, SwaggerParameter("电影Id")]long id)
+        public ActionResult GetOneMovie([FromRoute, SwaggerParameter("电影Id")]long id)
         {
             return Ok(new { code = 0, data =  _dbContext.Movies.FirstOrDefault(m =>m.Id == id)});
         }
