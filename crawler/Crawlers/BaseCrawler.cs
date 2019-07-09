@@ -30,6 +30,7 @@ namespace MovieCrawler.Crawlers
 
         public void Run()
         {
+
             var name = this.GetType().Name.ToLower();
             Console.WriteLine($"{name}爬虫开始");
             foreach (var config in _appsetgins.CrawlerConfigs.Where(c => c.Name == name.ToLower()))
@@ -47,7 +48,14 @@ namespace MovieCrawler.Crawlers
                     Console.WriteLine($"crawl {host} end,movies count:{movies.Count}");
                 }
             }
-            
+            // 每天隔着6个小时Job执行
+            if (DateTime.Now.Hour % 6 == 0)
+            {
+                var result = _movieDapper.SyncMovieTypes();
+                Console.WriteLine($"SyncMovieTypes success, count:{result}");
+            }
+
+
         }
 
     }

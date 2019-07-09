@@ -17,5 +17,7 @@ namespace MovieCrawler.API.Dao
         }
         public DbSet<DBMovie> Movies { get; set; }
 
+         public DbSet<DBMovieType> MovieTypes { get; set; }
+
     }
 }

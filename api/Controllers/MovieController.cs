@@ -32,7 +32,7 @@ namespace MovieCrawler.API.Controllers
             var query = _dbContext.Movies.AsQueryable();
             if (!string.IsNullOrEmpty(type))
             {
-                query = query.Where(q => q.Type == type);
+                query = query.Where(q => q.Type ==(type));
             }
             if (!string.IsNullOrEmpty(keyword))
             {
@@ -55,6 +55,13 @@ namespace MovieCrawler.API.Controllers
         public ActionResult GetOneMovie([FromRoute, SwaggerParameter("电影Id")]long id)
         {
             return Ok(new { code = 0, data =  _dbContext.Movies.FirstOrDefault(m =>m.Id == id)});
+        }
+
+        [HttpGet("api/v1/movie-types")]
+        [SwaggerResponse(200, "", typeof(List<DBMovieType>))]
+        public ActionResult GetMovieTypes()
+        {
+            return Ok(new { code = 0, data =  _dbContext.MovieTypes.ToList()});
         }
 
 

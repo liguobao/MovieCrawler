@@ -33,6 +33,24 @@ namespace MovieCrawler.Dao
 
         }
 
+        public int SyncMovieTypes()
+        {
+            using (IDbConnection dbConnection = GetConnection())
+            {
+                dbConnection.Open();
+                var result = dbConnection.Execute(@"insert movie_map.movie_type (name) 
+                (select * from
+                (SELECT 
+                    Type
+                FROM
+                    movie_map.movie order by CreateTime limit 10000) as tmp
+                GROUP BY Type) ON DUPLICATE KEY UPDATE  UpdateTime = now();;");
+                return result;
+            }
+
+        }
+
+
 
 
     }
