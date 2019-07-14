@@ -65,7 +65,8 @@ namespace MovieCrawler.Crawlers
                     Name = li.QuerySelector("b").TextContent,
                     Link = onlineURL,
                     PublishTime = publishTime,
-                    UpdateTime = DateTime.Now
+                    UpdateTime = DateTime.Now,
+                    CreateTime = DateTime.Now,
                 };
                 FillMovieDetail(onlineURL, movie);
                 movies.Add(movie);

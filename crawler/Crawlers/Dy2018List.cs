@@ -29,7 +29,8 @@ namespace MovieCrawler.Crawlers
                {
                    Name = a.TextContent,
                    Link = onlineURL,
-                   UpdateTime = DateTime.Now
+                   UpdateTime = DateTime.Now,
+                   PublishTime =DateTime.Now,
                };
                FillMovieDetail(onlineURL, movie);
                return movie;

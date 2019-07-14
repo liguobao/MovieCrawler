@@ -58,7 +58,9 @@ namespace MovieCrawler.Crawlers
                     Name = a.GetAttribute("title"),
                     Type = dom.QuerySelector("p.des").TextContent,
                     Link = onlineURL,
-                    UpdateTime = DateTime.Now
+                    UpdateTime = DateTime.Now,
+                    PublishTime = DateTime.Now,
+                    CreateTime = DateTime.Now,
                 };
                 FillMovieDetail(onlineURL, movie);
                 return movie;
