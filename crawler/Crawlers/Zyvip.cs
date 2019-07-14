@@ -23,9 +23,9 @@ namespace MovieCrawler.Crawlers
             try
             {
                 var client = new RestClient(url);
+                client.Timeout = 100 * 1000;
                 var request = new RestRequest(Method.GET);
                 request.AddHeader("cache-control", "no-cache");
-                request.AddHeader("Cookie", "PHPSESSID=c92cf162f492477892f33176cae9894c");
                 request.AddHeader("Accept-Language", "zh-CN,zh;q=0.9");
                 request.AddHeader("Accept-Encoding", "gzip, deflate");
                 request.AddHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");

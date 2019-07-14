@@ -23,8 +23,8 @@ namespace MovieCrawler.Crawlers
             try
             {
                 var client = new RestClient(url);
+                client.Timeout = 100 * 1000;
                 var request = new RestRequest(Method.GET);
-                request.AddHeader("cookie", "Hm_lvt_99249fb41a838398a3cc1c3ad2258fe7=1546271464; PHPSESSID=9d2pjf6t7ehm3spgrtdrrnvob2; bdshare_firstime=1546525379896; Hm_lvt_99249fb41a838398a3cc1c3ad2258fe7=1546271464; Hm_lpvt_99249fb41a838398a3cc1c3ad2258fe7=1546526389");
                 request.AddHeader("accept-language", "zh-CN,zh;q=0.9,en;q=0.8,da;q=0.7");
                 request.AddHeader("accept-encoding", "gzip, deflate");
                 request.AddHeader("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
@@ -40,7 +40,6 @@ namespace MovieCrawler.Crawlers
             catch (Exception ex)
             {
                 Console.WriteLine($"LoadHTML fail,url:{url},ex:{ex.ToString()}");
-               
                 return string.Empty;
             }
 
@@ -57,7 +56,7 @@ namespace MovieCrawler.Crawlers
                 var movie = new DBMovie()
                 {
                     Name = a.GetAttribute("title"),
-                    Type=dom.QuerySelector("p.des").TextContent,
+                    Type = dom.QuerySelector("p.des").TextContent,
                     Link = onlineURL,
                     UpdateTime = DateTime.Now
                 };
@@ -73,7 +72,7 @@ namespace MovieCrawler.Crawlers
             if (!string.IsNullOrEmpty(movieHTML))
             {
                 var htmlDoc = htmlParser.Parse(movieHTML);
-                movie.PublishTime =DateTime.Parse(htmlDoc?.QuerySelector("div.vod_intro").QuerySelector("dd").TextContent);
+                movie.PublishTime = DateTime.Parse(htmlDoc?.QuerySelector("div.vod_intro").QuerySelector("dd").TextContent);
                 movie.Cover = htmlDoc?.QuerySelector("div.vod_img")?.QuerySelector("img")?.GetAttribute("src");
                 movie.Intro = htmlDoc?.QuerySelector("div.des")?.InnerHtml;
                 if (htmlDoc.QuerySelectorAll("div.p_list").Any())

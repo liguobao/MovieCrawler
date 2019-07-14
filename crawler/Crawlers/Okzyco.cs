@@ -23,6 +23,7 @@ namespace MovieCrawler.Crawlers
             try
             {
                 var client = new RestClient(url);
+                client.Timeout = 100 * 1000;
                 var request = new RestRequest(Method.GET);
                 request.AddHeader("accept-language", "zh-CN,zh;q=0.9,en;q=0.8,da;q=0.7");
                 request.AddHeader("accept-encoding", "gzip, deflate");

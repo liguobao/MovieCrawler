@@ -24,9 +24,9 @@ namespace MovieCrawler.Crawlers
             {
                 var client = new RestClient(url);
                 var request = new RestRequest(Method.GET);
+                client.Timeout = 100 * 1000;
                 request.AddHeader("cache-control", "no-cache");
-                request.AddHeader("Cookie", "UM_distinctid=16835e615302df-0d0ac9a20ada1c-8383268-144000-16835e61531a8; CNZZDATA1275306004=660114627-1547087732-null^%^7C1547557410");
-                request.AddHeader("Accept-Language", "zh-CN,zh;q=0.9");
+                 request.AddHeader("Accept-Language", "zh-CN,zh;q=0.9");
                 request.AddHeader("Accept-Encoding", "gzip, deflate");
                 request.AddHeader("Referer", "http://www.btkat.com/list/");
                 request.AddHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");

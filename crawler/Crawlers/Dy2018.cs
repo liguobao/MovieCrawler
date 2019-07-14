@@ -24,6 +24,7 @@ namespace MovieCrawler.Crawlers
             try
             {
                 System.Net.WebRequest wRequest = System.Net.WebRequest.Create(url);
+                wRequest.Timeout = 100 * 1000;
                 wRequest.Headers.Add("authority", "www.dy2018.com");
                 wRequest.Headers.Add("accept-language", "zh-CN,zh;q=0.9,en;q=0.8,da;q=0.7");
                 wRequest.Headers.Add("user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36");

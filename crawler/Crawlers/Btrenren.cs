@@ -23,6 +23,7 @@ namespace MovieCrawler.Crawlers
             try
             {                
                 var client = new RestClient(url);
+                client.Timeout = 100 * 1000;
                 var request = new RestRequest(Method.GET);
                 request.AddHeader("cache-control", "no-cache");
                 request.AddHeader("Cookie", "bdshare_firstime=1547013531108; PHPSESSID=skp6k9v4on7mo0u9v15146d1u6; cck_lasttime=1547274547972; cck_count=0");

@@ -23,6 +23,7 @@ namespace MovieCrawler.Crawlers
             try
             {
                 var client = new RestClient(url);
+                client.Timeout = 100 * 1000;
                 var request = new RestRequest(Method.GET);
                 request.AddHeader("cookie", "__cfduid=d1f999af24142fe052d324bc084d4b0581547477703; _ga=GA1.2.855729766.1547477711; _gid=GA1.2.415865825.1547477711; Hm_lvt_427f72ce75b0677eb10f24419484eb80=1547477711,1547477844; playss=7; Hm_lpvt_427f72ce75b0677eb10f24419484eb80=1547478646");
                 request.AddHeader("accept-language", "zh-CN,zh;q=0.9");

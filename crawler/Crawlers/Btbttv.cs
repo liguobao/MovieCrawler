@@ -23,6 +23,7 @@ namespace MovieCrawler.Crawlers
             try
             {
                 var client = new RestClient(url);
+                client.Timeout = 100 * 1000;
                 var request = new RestRequest(Method.GET);
                 request.AddHeader("cache-control", "no-cache");
                 request.AddHeader("Cookie", "UM_distinctid=168463812da34e-0def2a16921313-8383268-144000-168463812db344; CNZZDATA1275862394=159304514-1547364685-^%^7C1547538394");
