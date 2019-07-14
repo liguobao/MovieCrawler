@@ -24,15 +24,25 @@ namespace MovieCrawler.Dao
 
         public DateTime UpdateTime { get; set; }
 
-         public DateTime CreateTime { get; set; }
+        public DateTime CreateTime { get; set; }
 
         public List<Resource> DownResources { get; set; }
 
-        public string Resources {
+        public string Resources
+        {
             get
             {
-                return JToken.FromObject(this.DownResources).ToString();
-            }}
+                if (this.DownResources != null)
+                {
+                    return JToken.FromObject(this.DownResources).ToString();
+                }
+                else
+                {
+                    return "[]";
+                }
+
+            }
+        }
     }
 
     public class Resource
